@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🕌 Revisión Completa de Tajwid - Curso Interactivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600;700;900&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#3B82F6;
+  --azul-claro:#60A5FA;
+  --azul-oscuro:#1E40AF;
+  --verde:#10B981;
+  --verde-claro:#34D399;
+  --amarillo:#FCD34D;
+  --naranja:#FB923C;
+  --rojo:#EF4444;
+  --rosa:#EC4899;
+  --morado:#8B5CF6;
+  --dorado:#FFD700;
+  --turquesa:#06B6D4;
+  --oscuro:#1F2937;
+  --claro:#F0F9FF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#DBEAFE 0%,#FEF3C7 50%,#D1FAE5 100%);
+  min-height:100vh;
+  color:var(--oscuro);
+  padding:15px;
+  line-height:1.7;
+}
+.arabic{font-family:'Amiri',serif;direction:rtl}
+
+/* === CONFETTI === */
+.confetti{position:fixed;top:-10px;width:10px;height:10px;z-index:9999;pointer-events:none;animation:fall 3s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* === CONTAINER === */
+.container{
+  max-width:1000px;margin:0 auto;background:white;
+  border-radius:30px;box-shadow:0 25px 60px rgba(0,0,0,0.15);overflow:hidden;
+  position:relative;
+}
+
+/* === NAV === */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(90deg,var(--azul-oscuro),var(--azul),var(--verde));
+  padding:12px 20px;display:flex;justify-content:space-between;align-items:center;
+  border-radius:0 0 20px 20px;box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+.nav button{
+  background:white;border:none;padding:10px 18px;border-radius:25px;
+  font-family:'Poppins';font-weight:700;font-size:14px;cursor:pointer;
+  color:var(--oscuro);transition:0.3s;
+}
+.nav button:hover{transform:scale(1.05);box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+.nav button:disabled{opacity:0.4;cursor:not-allowed}
+.nav .page-info{
+  background:white;padding:8px 16px;border-radius:20px;
+  font-weight:700;color:var(--azul-oscuro);
+}
+
+/* === PAGE === */
+.page{display:none;padding:30px 25px;min-height:90vh;animation:slideIn 0.5s}
+.page.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* === HERO === */
+.hero{
+  background:linear-gradient(135deg,var(--azul-oscuro) 0%,var(--azul) 40%,var(--verde) 100%);
+  color:white;text-align:center;padding:50px 25px 80px;
+  border-radius:0 0 50px 50px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(circle at 20% 30%,rgba(255,255,255,0.2) 0%,transparent 50%),
+             radial-gradient(circle at 80% 70%,rgba(252,211,77,0.3) 0%,transparent 50%);
+}
+.cloud{position:absolute;font-size:40px;opacity:0.6;animation:float 6s ease-in-out infinite}
+.cloud:nth-child(1){top:20px;left:10%;animation-delay:0s}
+.cloud:nth-child(2){top:60px;right:15%;animation-delay:2s}
+.cloud:nth-child(3){bottom:30px;left:20%;animation-delay:4s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+
+.star{position:absolute;color:var(--amarillo);font-size:20px;animation:twinkle 2s infinite}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.mascot{
+  font-size:100px;display:inline-block;animation:bounce 2s ease-in-out infinite;
+  position:relative;z-index:2;
+}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.hero h1{
+  font-size:46px;margin:15px 0;font-weight:900;
+  text-shadow:3px 3px 0 rgba(0,0,0,0.2);position:relative;z-index:2;
+}
+.hero p.subtitle{font-size:20px;margin:10px 0 30px;position:relative;z-index:2}
+.start-btn{
+  background:linear-gradient(90deg,var(--naranja),var(--amarillo));
+  color:white;border:none;padding:18px 50px;border-radius:50px;
+  font-size:22px;font-weight:700;cursor:pointer;
+  box-shadow:0 8px 25px rgba(251,146,60,0.5);
+  transition:0.3s;position:relative;z-index:2;
+  font-family:'Poppins';
+}
+.start-btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 12px 30px rgba(251,146,60,0.6)}
+
+/* === PROGRESS BAR === */
+.progress-wrap{
+  background:white;padding:20px;border-radius:20px;margin:-40px 25px 20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;z-index:5;
+  text-align:center;
+}
+.progress-label{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:10px;font-weight:700;color:var(--azul-oscuro);
+}
+.progress-track{background:#E5E7EB;height:20px;border-radius:15px;overflow:hidden;position:relative}
+.progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--verde),var(--azul-claro),var(--morado));
+  border-radius:15px;transition:width 0.8s ease;
+  position:relative;overflow:hidden;
+}
+.progress-fill::after{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+  animation:shimmer 2s infinite;
+}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.stars{display:flex;justify-content:center;gap:5px;margin-top:10px;font-size:20px}
+
+/* === SECTION TITLES === */
+h2{
+  font-size:30px;background:linear-gradient(90deg,var(--azul),var(--verde));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin:25px 0 15px;padding-bottom:10px;border-bottom:4px dashed var(--azul);
+  display:flex;align-items:center;gap:10px;
+}
+h3{font-size:22px;color:var(--azul-oscuro);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+
+/* === CARDS === */
+.card{
+  background:white;border-radius:25px;padding:25px;margin:15px 0;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  border:3px solid transparent;transition:0.3s;position:relative;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,0,0,0.12)}
+.card.green{border-color:var(--verde);background:linear-gradient(135deg,#ECFDF5,#D1FAE5)}
+.card.blue{border-color:var(--azul);background:linear-gradient(135deg,#EFF6FF,#DBEAFE)}
+.card.purple{border-color:var(--morado);background:linear-gradient(135deg,#F5F3FF,#EDE9FE)}
+.card.pink{border-color:var(--rosa);background:linear-gradient(135deg,#FDF2F8,#FCE7F3)}
+.card.yellow{border-color:var(--amarillo);background:linear-gradient(135deg,#FEFCE8,#FEF3C7)}
+.card.orange{border-color:var(--naranja);background:linear-gradient(135deg,#FFF7ED,#FED7AA)}
+.card.cyan{border-color:var(--turquesa);background:linear-gradient(135deg,#ECFEFF,#CFFAFE)}
+
+/* === ARABIC WORD CARD === */
+.arabic-card{
+  background:white;border-radius:20px;padding:20px;margin:10px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+  text-align:center;cursor:pointer;transition:0.3s;
+  border:3px solid var(--azul-claro);
+}
+.arabic-card:hover{transform:scale(1.05);box-shadow:0 12px 30px rgba(59,130,246,0.3)}
+.arabic-card .word{font-size:42px;color:var(--azul-oscuro);margin:10px 0;line-height:1.5}
+.arabic-card .label{color:#666;font-size:14px;font-weight:600}
+.arabic-card .highlight-lam{color:var(--verde);font-weight:700;font-size:48px}
+.arabic-card .highlight-kasrah{color:var(--azul);background:#DBEAFE;padding:2px 6px;border-radius:5px}
+.arabic-card .highlight-fathah{color:var(--naranja);background:#FED7AA;padding:2px 6px;border-radius:5px}
+.arabic-card .highlight-madd{color:var(--rojo);background:#FECACA;padding:2px 6px;border-radius:5px;animation:pulse 1.5s infinite}
+.arabic-card .highlight-ra{color:var(--morado);background:#EDE9FE;padding:2px 6px;border-radius:5px}
+
+.audio-btn{
+  background:linear-gradient(90deg,var(--azul),var(--azul-claro));
+  color:white;border:none;padding:8px 15px;border-radius:20px;
+  cursor:pointer;font-weight:600;font-size:14px;
+  display:inline-flex;align-items:center;gap:5px;margin-top:8px;
+  transition:0.3s;
+}
+.audio-btn:hover{transform:scale(1.05);box-shadow:0 5px 15px rgba(59,130,246,0.4)}
+
+/* === INFO BOX === */
+.info-box{
+  border-radius:20px;padding:20px;margin:15px 0;
+  border-left:6px solid var(--azul);background:#F0F9FF;
+  position:relative;
+}
+.info-box::before{content:"💡";position:absolute;top:-15px;left:20px;font-size:30px;background:white;padding:5px 10px;border-radius:50%;border:3px solid var(--azul)}
+.info-box h4{color:var(--azul-oscuro);font-size:18px;margin-bottom:8px;margin-left:40px}
+.info-box p{color:#1F2937;font-size:15px;margin-left:0}
+.info-box.success{border-color:var(--verde);background:#ECFDF5}
+.info-box.success::before{content:"✅";border-color:var(--verde)}
+.info-box.success h4{color:var(--verde)}
+.info-box.warn{border-color:var(--naranja);background:#FFF7ED}
+.info-box.warn::before{content:"⚠️";border-color:var(--naranja)}
+.info-box.warn h4{color:var(--naranja)}
+.info-box.story{border-color:var(--morado);background:#F5F3FF}
+.info-box.story::before{content:"📖";border-color:var(--morado)}
+.info-box.story h4{color:var(--morado)}
+.info-box.goal{border-color:var(--rosa);background:#FDF2F8}
+.info-box.goal::before{content:"🎯";border-color:var(--rosa)}
+.info-box.goal h4{color:var(--rosa)}
+
+/* === QUIZ === */
+.quiz-box{
+  background:white;border-radius:25px;padding:25px;margin:20px 0;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);border:3px solid var(--azul-claro);
+  position:relative;
+}
+.quiz-q{
+  font-size:18px;font-weight:700;color:var(--oscuro);margin-bottom:15px;
+  padding:15px;background:linear-gradient(90deg,#DBEAFE,#BFDBFE);
+  border-radius:15px;border-left:5px solid var(--azul);
+}
+.options{display:grid;gap:10px}
+.option{
+  background:#F8FAFC;padding:14px 20px;border-radius:15px;cursor:pointer;
+  transition:0.3s;border:3px solid transparent;font-weight:600;font-size:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.option:hover{background:var(--amarillo);transform:translateX(-5px);border-color:var(--naranja)}
+.option.correct{background:var(--verde)!important;color:white!important;border-color:#059669!important;animation:correctPulse 0.6s}
+.option.wrong{background:#FEE2E2!important;border-color:var(--rojo)!important;animation:shake 0.5s}
+@keyframes correctPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.option.sound{animation:correctPulse 0.6s}
+
+.feedback{
+  margin-top:15px;padding:15px;border-radius:15px;font-weight:700;
+  display:none;font-size:15px;
+}
+.feedback.show{display:block;animation:slideIn 0.4s}
+.feedback.correct{background:var(--verde);color:white}
+.feedback.wrong{background:#FEE2E2;color:var(--rojo)}
+
+/* === DRAG & DROP === */
+.dragdrop-area{
+  background:white;border-radius:20px;padding:20px;margin:15px 0;
+  border:3px dashed var(--azul-claro);
+}
+.drag-pool{
+  display:flex;flex-wrap:wrap;gap:10px;padding:15px;
+  background:#F0F9FF;border-radius:15px;min-height:70px;margin-bottom:15px;
+  align-items:center;justify-content:center;
+}
+.drag-item{
+  background:linear-gradient(135deg,var(--amarillo),var(--naranja));
+  color:white;padding:10px 18px;border-radius:15px;cursor:grab;
+  font-weight:700;font-size:18px;user-select:none;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);transition:0.3s;
+  font-family:'Amiri',serif;
+}
+.drag-item:active{cursor:grabbing;transform:scale(0.95)}
+.drag-item.dragging{opacity:0.5}
+
+.dropzones{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:10px}
+.dropzone{
+  background:#FEFCE8;border:3px dashed var(--naranja);
+  border-radius:15px;padding:15px;min-height:120px;
+  transition:0.3s;
+}
+.dropzone.over{background:#D1FAE5;border-color:var(--verde);transform:scale(1.02)}
+.dropzone h4{text-align:center;color:var(--naranja);margin-bottom:10px;font-size:18px}
+.dropzone.green h4{color:var(--verde)}
+.dropzone.blue h4{color:var(--azul)}
+.dropzone.red h4{color:var(--rojo)}
+.dropzone.purple h4{color:var(--morado)}
+
+/* === TIMER === */
+.timer{
+  display:inline-block;background:linear-gradient(90deg,var(--rojo),var(--naranja));
+  color:white;padding:10px 25px;border-radius:25px;font-weight:700;font-size:18px;
+  box-shadow:0 4px 15px rgba(239,68,68,0.3);
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* === BEATS ANIMATION === */
+.beats{display:flex;gap:8px;justify-content:center;margin:15px 0}
+.beat{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--azul),var(--azul-claro));
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-weight:700;font-size:16px;
+  animation:beatPulse 1s ease-in-out infinite;
+  box-shadow:0 4px 10px rgba(59,130,246,0.3);
+}
+.beat:nth-child(1){animation-delay:0s}
+.beat:nth-child(2){animation-delay:0.2s}
+.beat:nth-child(3){animation-delay:0.4s}
+.beat:nth-child(4){animation-delay:0.6s}
+.beat:nth-child(5){animation-delay:0.8s}
+.beat:nth-child(6){animation-delay:1s}
+@keyframes beatPulse{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.2);opacity:1}}
+
+/* === MADD LETTERS === */
+.madd-letters{display:flex;justify-content:center;gap:30px;margin:20px 0;flex-wrap:wrap}
+.madd-letter{
+  width:120px;height:120px;border-radius:25px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:80px;font-family:'Amiri',serif;font-weight:700;
+  color:white;cursor:pointer;transition:0.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);position:relative;
+}
+.madd-letter:hover{transform:translateY(-10px) scale(1.1);box-shadow:0 15px 35px rgba(0,0,0,0.3)}
+.madd-letter.alif{background:linear-gradient(135deg,var(--naranja),#FBBF24)}
+.madd-letter.waw{background:linear-gradient(135deg,var(--azul),var(--azul-claro))}
+.madd-letter.ya{background:linear-gradient(135deg,var(--verde),var(--verde-claro))}
+.madd-letter .vowel{
+  position:absolute;bottom:-25px;font-size:18px;color:#666;
+  background:white;padding:3px 10px;border-radius:10px;
+  font-family:'Poppins';font-weight:700;
+}
+
+/* === BADGES === */
+.badge{
+  display:inline-block;background:linear-gradient(135deg,var(--dorado),#FFA500);
+  color:white;padding:8px 15px;border-radius:20px;
+  font-weight:700;font-size:13px;margin:3px;
+  box-shadow:0 4px 10px rgba(255,215,0,0.3);
+}
+
+/* === BUTTONS === */
+.btn{
+  background:linear-gradient(90deg,var(--azul),var(--azul-claro));
+  color:white;border:none;padding:14px 30px;border-radius:25px;
+  font-family:'Poppins';font-size:16px;font-weight:700;cursor:pointer;
+  margin:10px 5px;transition:0.3s;
+  box-shadow:0 5px 15px rgba(59,130,246,0.3);
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(59,130,246,0.4)}
+.btn.green{background:linear-gradient(90deg,var(--verde),var(--verde-claro));box-shadow:0 5px 15px rgba(16,185,129,0.3)}
+.btn.orange{background:linear-gradient(90deg,var(--naranja),var(--amarillo));box-shadow:0 5px 15px rgba(251,146,60,0.3)}
+.btn.red{background:linear-gradient(90deg,var(--rojo),#F87171);box-shadow:0 5px 15px rgba(239,68,68,0.3)}
+.btn.purple{background:linear-gradient(90deg,var(--morado),#A78BFA);box-shadow:0 5px 15px rgba(139,92,246,0.3)}
+.btn.gold{background:linear-gradient(90deg,var(--dorado),#FFA500);box-shadow:0 5px 15px rgba(255,215,0,0.3)}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+
+/* === CERTIFICATE === */
+.certificate{
+  background:linear-gradient(135deg,#FFFEF7,#FEF3C7);
+  border:8px double var(--dorado);
+  border-radius:20px;padding:40px 30px;margin:20px 0;
+  text-align:center;position:relative;
+  box-shadow:0 20px 50px rgba(0,0,0,0.2);
+}
+.certificate::before{
+  content:'';position:absolute;top:10px;left:10px;right:10px;bottom:10px;
+  border:3px solid var(--dorado);border-radius:15px;pointer-events:none;
+}
+.cert-trophy{font-size:80px;margin-bottom:15px;animation:bounce 2s infinite}
+.cert-title{font-size:36px;color:var(--azul-oscuro);font-weight:900;margin:10px 0;font-family:'Fredoka'}
+.cert-name{font-size:30px;color:var(--verde);font-weight:700;margin:15px 0;padding:10px;border-bottom:3px solid var(--dorado);display:inline-block;min-width:300px}
+.cert-score{font-size:22px;color:var(--naranja);margin:15px 0;font-weight:700}
+.cert-date{color:#666;margin:10px 0}
+.cert-signature{margin-top:30px;color:var(--azul-oscuro);font-style:italic}
+
+/* === TRUE/FALSE === */
+.tf-row{
+  display:grid;grid-template-columns:1fr auto auto;gap:12px;
+  align-items:center;padding:14px;margin:8px 0;
+  background:white;border-radius:15px;border:2px solid #E5E7EB;
+  transition:0.3s;
+}
+.tf-row:hover{border-color:var(--azul-claro)}
+.tf-btn{
+  padding:10px 20px;border:none;border-radius:12px;
+  font-family:'Poppins';font-weight:700;cursor:pointer;font-size:15px;
+  transition:0.3s;
+}
+.tf-btn.V{background:#FEE2E2;color:var(--rojo)}
+.tf-btn.F{background:#D1FAE5;color:var(--verde)}
+.tf-btn.active.V{background:var(--verde);color:white;transform:scale(1.1)}
+.tf-btn.active.F{background:var(--rojo);color:white;transform:scale(1.1)}
+.tf-btn.correct{background:var(--verde)!important;color:white!important;box-shadow:0 0 15px var(--verde)}
+.tf-btn.wrong{background:var(--rojo)!important;color:white!important;animation:shake 0.5s}
+
+/* === FILL IN === */
+input.blank{
+  background:#FFFBEA;border:3px dashed var(--naranja);
+  border-radius:10px;padding:6px 12px;
+  font-family:'Poppins';font-size:15px;font-weight:700;
+  width:160px;text-align:center;color:var(--naranja);
+  transition:0.3s;
+}
+input.blank:focus{outline:none;border-style:solid;background:white;transform:scale(1.05)}
+
+/* === MATCHING === */
+.match-container{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0}
+.match-col h4{text-align:center;color:white;padding:10px;border-radius:15px;font-size:17px;margin-bottom:10px}
+.match-col.left h4{background:var(--azul)}
+.match-col.right h4{background:var(--rosa)}
+.match-item{
+  background:white;padding:14px;margin:5px 0;border-radius:12px;
+  cursor:pointer;border:3px solid #E5E7EB;transition:0.3s;
+  font-weight:600;text-align:center;
+}
+.match-item:hover{border-color:var(--azul);transform:scale(1.02)}
+.match-item.selected{background:var(--amarillo);border-color:var(--naranja)}
+.match-item.matched{background:var(--verde);color:white;border-color:var(--verde);pointer-events:none;animation:correctPulse 0.5s}
+.match-item.wrong-match{background:var(--rojo);color:white;animation:shake 0.5s}
+
+/* === SLIDER === */
+.slider-container{
+  background:white;padding:25px;border-radius:20px;margin:15px 0;
+  border:3px solid var(--azul-claro);
+}
+input[type="range"]{
+  width:100%;height:10px;border-radius:5px;background:#E5E7EB;
+  outline:none;-webkit-appearance:none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(135deg,var(--azul),var(--azul-claro));
+  cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+input[type="range"]::-moz-range-thumb{
+  width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(135deg,var(--azul),var(--azul-claro));
+  cursor:pointer;border:none;
+}
+.slider-value{text-align:center;font-size:32px;color:var(--azul-oscuro);font-weight:700;margin:10px 0}
+
+/* === TABS === */
+.tabs{display:flex;gap:10px;margin:15px 0;flex-wrap:wrap}
+.tab{
+  background:white;padding:10px 20px;border-radius:15px;
+  cursor:pointer;font-weight:600;border:2px solid #E5E7EB;transition:0.3s;
+}
+.tab.active{background:var(--azul);color:white;border-color:var(--azul)}
+.tab:hover{border-color:var(--azul)}
+
+/* === LESSON OVERVIEW CARDS === */
+.lesson-overview{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;margin:20px 0;
+}
+.lesson-card{
+  background:white;border-radius:20px;padding:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  border:3px solid #E5E7EB;transition:0.3s;cursor:pointer;
+  text-align:center;
+}
+.lesson-card:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,0.15)}
+.lesson-card .icon{font-size:50px;margin-bottom:10px}
+.lesson-card h4{color:var(--azul-oscuro);margin-bottom:8px;font-size:18px}
+.lesson-card p{font-size:13px;color:#666}
+
+/* === TABLE === */
+table{width:100%;border-collapse:collapse;margin:15px 0}
+table th{padding:12px;background:linear-gradient(90deg,var(--azul),var(--azul-claro));color:white}
+table td{padding:10px;border-bottom:1px solid #eee}
+
+/* === UL custom === */
+ul.custom{padding-right:25px;line-height:2.2}
+ul.custom li{margin-bottom:8px;font-size:15px}
+
+/* === RESPONSIVE === */
+@media(max-width:768px){
+  body{padding:8px}
+  .page{padding:20px 15px}
+  .hero h1{font-size:32px}
+  .hero p.subtitle{font-size:16px}
+  .mascot{font-size:70px}
+  h2{font-size:24px}
+  h3{font-size:18px}
+  .madd-letters{gap:15px}
+  .madd-letter{width:90px;height:90px;font-size:60px}
+  .nav button{padding:8px 12px;font-size:12px}
+  .match-container,.dropzones,.tabs{grid-template-columns:1fr;flex-direction:column}
+  .tf-row{grid-template-columns:1fr;text-align:center}
+  .vocab-grid{grid-template-columns:repeat(2,1fr)}
+  .progress-wrap{margin:-30px 15px 15px;padding:15px}
+  .certificate{padding:30px 20px}
+  .cert-title{font-size:26px}
+  .cert-name{font-size:22px;min-width:200px}
+  .arabic-card{padding:15px 8px;margin:5px}
+  .arabic-card .word{font-size:28px}
+  .card{padding:18px}
+  .info-box{padding:15px}
+  .info-box h4{font-size:15px;margin-left:35px}
+  .info-box p{font-size:14px}
+  .quiz-box{padding:18px}
+  .quiz-q{font-size:15px;padding:12px}
+  .option{font-size:14px;padding:12px 15px}
+  .btn{padding:10px 18px;font-size:14px}
+  input.blank{width:130px;font-size:13px}
+  .dropzone{min-height:90px;padding:10px}
+  .dropzone h4{font-size:15px}
+  .drag-item{font-size:16px;padding:8px 14px}
+  .info-box::before{font-size:22px;top:-12px}
+  .badge{font-size:11px;padding:6px 10px}
+  .star{font-size:14px}
+  .cloud{font-size:25px}
+  .lesson-overview{grid-template-columns:1fr}
+}
+@media print{
+  body{background:white;padding:0}
+  .container{box-shadow:none;border-radius:0}
+  .page{display:block!important;page-break-after:always;padding:20px}
+  .nav{display:none}
+  .hero{background:linear-gradient(135deg,var(--azul-oscuro),var(--azul))!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- NAV -->
+<div class="nav">
+  <button onclick="prevPage()">⬅️ Atrás</button>
+  <div class="page-info">📖 <span id="current">1</span> / <span id="totalPages">12</span></div>
+  <button onclick="nextPage()">Adelante ➡️</button>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 1: HERO + INTRO -->
+<!-- ============================================ -->
+<div class="page active">
+  <div class="hero">
+    <div class="cloud">☁️</div>
+    <div class="cloud">☁️</div>
+    <div class="cloud">☁️</div>
+    <div class="star" style="top:30px;left:20%">⭐</div>
+    <div class="star" style="top:80px;right:25%">✨</div>
+    <div class="star" style="bottom:60px;left:30%">⭐</div>
+    <div class="star" style="top:40%;right:10%">✨</div>
+    
+    <div class="mascot">🕌</div>
+    <h1>🕌 Revisión de Tajwid</h1>
+    <p class="subtitle">¡Aprende las reglas del Corán de forma fácil y divertida! 🌟</p>
+    <button class="start-btn" onclick="nextPage()">▶ Empezar la revisión</button>
+  </div>
+  
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>🌟 Tu progreso</span>
+      <span id="progressText">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="stars" id="starsDisplay">
+      <span style="opacity:0.3">⭐</span>
+      <span style="opacity:0.3">⭐</span>
+      <span style="opacity:0.3">⭐</span>
+      <span style="opacity:0.3">⭐</span>
+      <span style="opacity:0.3">⭐</span>
+    </div>
+    <div style="margin-top:15px">
+      <span class="badge">🏆 Principiante</span>
+      <span class="badge">📖 Lector</span>
+      <span class="badge">🌟 Estrella</span>
+    </div>
+  </div>
+  
+  <h2>👋 ¡Bienvenido/a!</h2>
+  <div class="info-box">
+    <h4>¿Qué es el Tajwid?</h4>
+    <p>El <strong>Tajwid</strong> (تجويد) es la forma <strong>correcta y precisa</strong> de leer el Corán. Es dar a cada letra su <strong>pronunciación perfecta</strong> respetando las reglas de la recitación. ✨📖</p>
+  </div>
+  
+  <h2>📚 Lo que vas a repasar</h2>
+  <div class="lesson-overview">
+    <div class="lesson-card" onclick="goToPage(2)">
+      <div class="icon">🌱</div>
+      <h4>1. Introducción</h4>
+      <p>Historia, significado y por qué es importante.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(3)">
+      <div class="icon">🔤</div>
+      <h4>2. Letras básicas</h4>
+      <p>Alfabeto, Halqiyyah, Tafkhim y Tarqiq.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(4)">
+      <div class="icon">👃</div>
+      <h4>3. Ghunnah</h4>
+      <p>Sonido nasal en Nun y Mim con Shaddah.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(5)">
+      <div class="icon">📜</div>
+      <h4>4. Nūn Sākinah y Tanwīn</h4>
+      <p>Idh-har, Idgham, Iqlāb e Ikhfā'.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(6)">
+      <div class="icon">👄</div>
+      <h4>5. Reglas de Mīm Sakinah</h4>
+      <p>Ikhfa, Idgham e Idh-har Shafawi.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(7)">
+      <div class="icon">💥</div>
+      <h4>6. Qalqalah</h4>
+      <p>El pequeño rebote en 5 letras especiales.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(8)">
+      <div class="icon">🟢</div>
+      <h4>7. Lām de Allah</h4>
+      <p>Cuándo es fuerte y cuándo es suave.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(9)">
+      <div class="icon">⏱️</div>
+      <h4>8. Al-Madd</h4>
+      <p>La prolongación: letras, Lin y reglas.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(10)">
+      <div class="icon">🎯</div>
+      <h4>9. Tipos de Madd</h4>
+      <p>Aslī, 'Āriḍ, Wājib y Lāzim.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(11)">
+      <div class="icon">🔴</div>
+      <h4>10. La letra Rā</h4>
+      <p>Fuerte o suave según la vocal.</p>
+    </div>
+    <div class="lesson-card" onclick="goToPage(12)">
+      <div class="icon">🏆</div>
+      <h4>11. Examen final</h4>
+      <p>¡Demuestra todo y gana tu certificado!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 2: INTRODUCCIÓN AL TAJWID -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>🌱 Lección 1: Introducción al Tajwid</h2>
+  
+  <div class="info-box goal">
+    <h4>🎯 Objetivos de la clase</h4>
+    <ul class="custom">
+      <li>✅ Explicar qué es el Tajwid.</li>
+      <li>✅ Comprender su importancia.</li>
+      <li>✅ Saber por qué se desarrollaron sus reglas.</li>
+      <li>✅ Prepararte antes de estudiar las normas de recitación.</li>
+    </ul>
+  </div>
+  
+  <h3>📖 ¿Qué significa la palabra "Tajwid"?</h3>
+  <div class="card green">
+    <p>La palabra Tajwid proviene del verbo árabe <span class="arabic" style="font-size:30px;color:var(--verde)">جَوَّدَ</span>, que significa:</p>
+    <p style="text-align:center;font-size:22px;font-weight:700;color:var(--verde);margin:15px 0">
+      ✨ "Hacer algo de la mejor manera posible" ✨
+    </p>
+    <p>En la terminología islámica, el Tajwid es:</p>
+    <div class="info-box success">
+      <h4>📜 Definición islámica</h4>
+      <p>Dar a cada letra del Corán su <strong>derecho</strong> y su <strong>pronunciación correcta</strong>, respetando las reglas de la recitación.</p>
+    </div>
+  </div>
+  
+  <h3>🤔 ¿Es solo leer con voz bonita?</h3>
+  <div class="card yellow">
+    <p>❌ <strong>No.</strong> Es importante aclarar que el Tajwid <strong>no consiste únicamente</strong> en leer con voz agradable.</p>
+    <p>El objetivo principal es:</p>
+    <ul class="custom">
+      <li>🎯 Pronunciar cada letra desde su <strong>punto correcto de articulación</strong>.</li>
+      <li>🎯 Respetar las <strong>características propias</strong> de cada letra.</li>
+      <li>🎯 <strong>Evitar cambios</strong> en el significado del Corán.</li>
+    </ul>
+  </div>
+  
+  <h3>❓ ¿Por qué es importante?</h3>
+  <div class="card orange">
+    <p>Una <strong>pronunciación incorrecta</strong> puede <strong>cambiar completamente</strong> el significado de una palabra del Corán.</p>
+    <div class="info-box warn" style="margin-top:15px">
+      <h4>⚠️ Atención</h4>
+      <p>Por esta razón, el Tajwid <strong>protege</strong> la correcta transmisión del Libro de Allah.</p>
+    </div>
+  </div>
+  
+  <h3>📜 Historia del Tajwid</h3>
+  <div class="info-box story">
+    <h4>📖 Una historia para recordar</h4>
+    <p style="margin-top:15px">Durante la vida del Profeta Muhammad ﷺ, los árabes hablaban el idioma árabe de forma natural.</p>
+    <p>Por eso pronunciaban correctamente el Corán <strong>sin necesidad</strong> de estudiar reglas escritas.</p>
+    <p>Más tarde, muchas personas <strong>no árabes</strong> aceptaron el Islam.</p>
+    <p>👉 <strong>Comenzaron a aparecer errores de pronunciación.</strong></p>
+    <p>Entonces los sabios <strong>recopilaron las reglas</strong> del Tajwid para preservar la correcta recitación del Corán.</p>
+  </div>
+  
+  <h3>🌟 La recompensa</h3>
+  <div class="info-box success">
+    <h4>🏆 Recompensa divina</h4>
+    <p>El musulmán debe esforzarse por recitar correctamente el Corán siguiendo las reglas del Tajwid, y <strong>cada letra</strong> recitada correctamente tiene <strong>recompensa ante Allah</strong>.</p>
+  </div>
+  
+  <h3>🗣️ Dificultades para hispanohablantes</h3>
+  <div class="card purple">
+    <h4>Primera dificultad: Sonidos guturales</h4>
+    <p>Los sonidos de la garganta que <strong>no existen en español</strong>:</p>
+    <div style="text-align:center;font-size:36px;margin:15px 0" class="arabic">
+      <span style="color:var(--rosa)">ء</span> – 
+      <span style="color:var(--rosa)">ه</span> – 
+      <span style="color:var(--rosa)">ح</span> – 
+      <span style="color:var(--rosa)">خ</span> – 
+      <span style="color:var(--rosa)">ع</span> – 
+      <span style="color:var(--rosa)">غ</span>
+    </div>
+    <p style="text-align:center">👉 Necesitan <strong>mucha práctica oral</strong>.</p>
+    
+    <h4>Segunda dificultad: Letras enfáticas</h4>
+    <p>El estudiante suele pronunciarlas igual:</p>
+    <div style="text-align:center;font-size:24px;margin:15px 0" class="arabic">
+      <span style="color:var(--azul)">س / ص</span> &nbsp;&nbsp; 
+      <span style="color:var(--azul)">ت / ط</span> &nbsp;&nbsp; 
+      <span style="color:var(--azul)">د / ض</span> &nbsp;&nbsp; 
+      <span style="color:var(--azul)">ك / ق</span>
+    </div>
+    
+    <h4>Tercera dificultad: La Ghunnah (غنة)</h4>
+    <p>En español <strong>no existe</strong> una nasalización semejante a la del Tajwid. Por ello requiere <strong>ejercicios repetitivos</strong> de escucha e imitación.</p>
+  </div>
+  
+  <h3>✅ Metodología recomendada</h3>
+  <div class="card green">
+    <ol style="padding-right:25px;line-height:2.2;font-size:16px">
+      <li>📖 <strong>Explicación breve.</strong></li>
+      <li>👂 <strong>Demostración.</strong></li>
+      <li>🔁 <strong>Repetición.</strong></li>
+      <li>✏️ <strong>Corrección.</strong></li>
+      <li>📚 <strong>Aplicación.</strong></li>
+    </ol>
+  </div>
+  
+  <h3>❌ Errores frecuentes de los profesores</h3>
+  <div class="card orange">
+    <p>❌ Explicar demasiada teoría. → ✔ <strong>Explicar poco y practicar mucho.</strong></p>
+    <p>❌ Enseñar varias reglas en una sola clase. → ✔ <strong>Enseñar una sola regla hasta dominarla.</strong></p>
+    <p>❌ Corregir únicamente al final. → ✔ <strong>Corregir el error en el mismo momento en que aparece.</strong></p>
+  </div>
+  
+  <!-- QUIZ -->
+  <h2>🎮 Mini Quiz: Introducción</h2>
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿De qué verbo árabe viene la palabra "Tajwid"?</div>
+    <div class="options" id="i1">
+      <div class="option" data-correct="false">A) كَتَبَ (escribir)</div>
+      <div class="option" data-correct="true">B) جَوَّدَ (hacer algo de la mejor manera)</div>
+      <div class="option" data-correct="false">C) قَرَأَ (leer)</div>
+    </div>
+    <div class="feedback" id="fb-i1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ ¿Por qué se recopilaron las reglas del Tajwid?</div>
+    <div class="options" id="i2">
+      <div class="option" data-correct="false">A) Para hacerlo más difícil</div>
+      <div class="option" data-correct="true">B) Porque los no árabes cometían errores de pronunciación</div>
+      <div class="option" data-correct="false">C) Por tradición cultural</div>
+    </div>
+    <div class="feedback" id="fb-i2"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn green" onclick="nextPage()">➡️ Siguiente: Letras básicas</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 3: LETRAS BÁSICAS -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>🔤 Lección 2: Las letras árabes básicas</h2>
+  
+  <div class="info-box">
+    <h4>📖 Antes de estudiar las reglas...</h4>
+    <p>Debemos conocer las letras árabes. Cada letra tiene:</p>
+    <ul class="custom">
+      <li>📛 Un <strong>nombre</strong>.</li>
+      <li>🔊 Un <strong>sonido</strong>.</li>
+      <li>📍 Un <strong>punto de articulación</strong>.</li>
+      <li>✨ <strong>Características especiales</strong>.</li>
+    </ul>
+  </div>
+  
+  <div class="card yellow">
+    <h3>⚠️ ¡Cuidado! No existen letras "iguales"</h3>
+    <p>Cada letra árabe tiene un sonido diferente. Ejemplos:</p>
+    <div style="text-align:center;font-size:32px;margin:15px 0" class="arabic">
+      <span style="color:var(--verde)">ق</span> <span style="font-size:24px">≠</span> <span style="color:var(--azul)">ك</span> &nbsp;&nbsp;&nbsp;
+      <span style="color:var(--verde)">ح</span> <span style="font-size:24px">≠</span> <span style="color:var(--azul)">ه</span> &nbsp;&nbsp;&nbsp;
+      <span style="color:var(--verde)">ص</span> <span style="font-size:24px">≠</span> <span style="color:var(--azul)">س</span>
+    </div>
+    <p style="text-align:center">👉 Por eso debemos aprender a <strong>escuchar</strong> y <strong>producir</strong> correctamente cada sonido.</p>
+  </div>
+  
+  <h3>🗣️ Las letras Halqiyyah (حروف الحلق)</h3>
+  <div class="card purple">
+    <p>Son <strong>seis letras</strong> que salen de la <strong>garganta</strong> (حلق):</p>
+    <div style="text-align:center;font-size:50px;margin:15px 0" class="arabic">
+      <span style="color:var(--morado)">ء</span> 
+      <span style="color:var(--morado)">هـ</span> 
+      <span style="color:var(--morado)">ع</span> 
+      <span style="color:var(--morado)">ح</span> 
+      <span style="color:var(--morado)">غ</span> 
+      <span style="color:var(--morado)">خ</span>
+    </div>
+    
+    <h4>📍 Tres partes de la garganta:</h4>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0">
+      <div class="card yellow" style="margin:0;padding:15px;text-align:center">
+        <div style="font-size:30px" class="arabic">ء هـ</div>
+        <p style="font-size:13px;margin-top:8px"><strong>Parte más profunda</strong></p>
+      </div>
+      <div class="card blue" style="margin:0;padding:15px;text-align:center">
+        <div style="font-size:30px" class="arabic">ع ح</div>
+        <p style="font-size:13px;margin-top:8px"><strong>Parte media</strong></p>
+      </div>
+      <div class="card green" style="margin:0;padding:15px;text-align:center">
+        <div style="font-size:30px" class="arabic">غ خ</div>
+        <p style="font-size:13px;margin-top:8px"><strong>Parte más cercana a la boca</strong></p>
+      </div>
+    </div>
+    
+    <h4>📌 Tres cosas que debemos recordar:</h4>
+    <ul class="custom">
+      <li>❌ No mover la lengua si no es necesario.</li>
+      <li>❌ No utilizar los labios para producir el sonido.</li>
+      <li>✅ El punto de articulación siempre está en la garganta.</li>
+    </ul>
+  </div>
+  
+  <h3>🅰️ Hamzah (ء) vs Alif (ا)</h3>
+  <div class="card cyan">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+      <div style="background:#FEF2F2;padding:15px;border-radius:15px;border:3px solid var(--rojo)">
+        <h4 style="color:var(--rojo);text-align:center">🔴 Hamzah (ء)</h4>
+        <ul class="custom">
+          <li>Es una <strong>consonante</strong>.</li>
+          <li>Tiene <strong>punto de articulación</strong> propio.</li>
+          <li>Puede llevar vocales.</li>
+          <li>Produce un sonido <strong>independiente</strong>.</li>
+        </ul>
+      </div>
+      <div style="background:#EFF6FF;padding:15px;border-radius:15px;border:3px solid var(--azul)">
+        <h4 style="color:var(--azul);text-align:center">🔵 Alif (ا)</h4>
+        <ul class="custom">
+          <li>Es una letra de <strong>prolongación</strong>.</li>
+          <li>Solo sirve para <strong>alargar el sonido</strong>.</li>
+          <li><strong>No tiene</strong> punto de articulación cuando es Madd.</li>
+          <li>Solo alarga el sonido anterior.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <h3>🟢 Letras de Tafkhim (حروف التفخيم)</h3>
+  <div class="card orange">
+    <p>Se pronuncian con voz <strong>más fuerte y llena</strong>. La parte posterior de la lengua se eleva ligeramente y el sonido es <strong>más grueso</strong>.</p>
+    <div style="text-align:center;font-size:50px;margin:15px 0" class="arabic">
+      <span style="color:var(--naranja)">خ</span> 
+      <span style="color:var(--naranja)">ص</span> 
+      <span style="color:var(--naranja)">ض</span> 
+      <span style="color:var(--naranja)">غ</span> 
+      <span style="color:var(--naranja)">ط</span> 
+      <span style="color:var(--naranja)">ق</span> 
+      <span style="color:var(--naranja)">ظ</span>
+    </div>
+  </div>
+  
+  <h3>🤍 Letras de Tarqiq (حروف الترقيق)</h3>
+  <div class="card blue">
+    <p>Todas las demás letras se pronuncian de manera <strong>ligera</strong>. La lengua permanece <strong>relajada</strong> y el sonido es <strong>suave y claro</strong>.</p>
+  </div>
+  
+  <!-- QUIZ -->
+  <h2>🎮 Mini Quiz: Letras básicas</h2>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿Cuántas letras Halqiyyah (de la garganta) hay?</div>
+    <div class="options" id="b1">
+      <div class="option" data-correct="false">A) Cuatro</div>
+      <div class="option" data-correct="true">B) Seis</div>
+      <div class="option" data-correct="false">C) Ocho</div>
+    </div>
+    <div class="feedback" id="fb-b1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ ¿Cuál es la diferencia principal entre Hamzah y Alif?</div>
+    <div class="options" id="b2">
+      <div class="option" data-correct="false">A) Son exactamente iguales</div>
+      <div class="option" data-correct="true">B) Hamzah es consonante y Alif es letra de prolongación</div>
+      <div class="option" data-correct="false">C) Alif lleva vocal y Hamzah no</div>
+    </div>
+    <div class="feedback" id="fb-b2"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">3️⃣ ¿La letra "ص" pertenece a las letras de...?</div>
+    <div class="options" id="b3">
+      <div class="option" data-correct="true">A) Tafkhim (fuerte/gruesa)</div>
+      <div class="option" data-correct="false">B) Tarqiq (suave/ligera)</div>
+      <div class="option" data-correct="false">C) Halqiyyah (de la garganta)</div>
+    </div>
+    <div class="feedback" id="fb-b3"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn green" onclick="nextPage()">➡️ Siguiente: Ghunnah</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 4: GHUNNAH -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>👃 Lección 3: La Ghunnah (غنة)</h2>
+  
+  <div class="info-box">
+    <h4>¿Qué es la Ghunnah?</h4>
+    <p>La <strong>Ghunnah</strong> es un <strong>sonido nasal</strong>. El sonido sale por la <strong>nariz</strong> y su duración es de <strong>dos tiempos</strong> (dos Ḥarakāt).</p>
+  </div>
+  
+  <h3>📌 ¿Cuándo se aplica?</h3>
+  <div class="card green">
+    <p>Cuando encontramos una <strong>Nun</strong> <span class="arabic" style="font-size:24px;color:var(--verde)">نّ</span> o una <strong>Mīm</strong> <span class="arabic" style="font-size:24px;color:var(--verde)">مّ</span> con <strong>Shaddah</strong> (ّ):</p>
+    <div style="text-align:center;margin:20px 0">
+      <div class="arabic-card" style="display:inline-block;margin:5px">
+        <div class="word"><span class="highlight-lam" style="color:var(--verde)">نّ</span></div>
+        <div class="label">Nun con Shaddah</div>
+      </div>
+      <div class="arabic-card" style="display:inline-block;margin:5px">
+        <div class="word"><span class="highlight-lam" style="color:var(--verde)">مّ</span></div>
+        <div class="label">Mīm con Shaddah</div>
+      </div>
+    </div>
+  </div>
+  
+  <h3>🌟 Ejemplos</h3>
+  <div class="dragdrop-area">
+    <div class="drag-pool">
+      <div class="arabic-card" style="margin:5px">
+        <div class="word" style="color:var(--verde)"><span class="highlight-madd">إِنَّ</span></div>
+        <div class="label">Inna</div>
+        <button class="audio-btn" onclick="speakArabic('إِنَّ')">🔊 Escuchar</button>
+      </div>
+      <div class="arabic-card" style="margin:5px">
+        <div class="word" style="color:var(--verde)"><span class="highlight-madd">ثُمَّ</span></div>
+        <div class="label">Thumma</div>
+        <button class="audio-btn" onclick="speakArabic('ثُمَّ')">🔊 Escuchar</button>
+      </div>
+      <div class="arabic-card" style="margin:5px">
+        <div class="word" style="color:var(--verde)"><span class="highlight-madd">أَمَّة</span></div>
+        <div class="label">Ummah</div>
+        <button class="audio-btn" onclick="speakArabic('أمة')">🔊 Escuchar</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="info-box warn">
+    <h4>⚠️ Errores frecuentes</h4>
+    <p>❌ No debemos <strong>eliminar</strong> el sonido nasal.</p>
+    <p>❌ Tampoco debemos <strong>prolongarlo demasiado</strong>.</p>
+    <p>✅ Siempre debe durar <strong>exactamente dos Ḥarakāt</strong>.</p>
+  </div>
+  
+  <!-- QUIZ -->
+  <h2>🎮 Mini Quiz: Ghunnah</h2>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿Cuánto dura la Ghunnah?</div>
+    <div class="options" id="g1">
+      <div class="option" data-correct="false">A) Un tiempo</div>
+      <div class="option" data-correct="true">B) Dos tiempos (dos Ḥarakāt)</div>
+      <div class="option" data-correct="false">C) Cuatro tiempos</div>
+    </div>
+    <div class="feedback" id="fb-g1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ ¿Por dónde sale el sonido de la Ghunnah?</div>
+    <div class="options" id="g2">
+      <div class="option" data-correct="false">A) Por la boca</div>
+      <div class="option" data-correct="true">B) Por la nariz</div>
+      <div class="option" data-correct="false">C) Por la garganta</div>
+    </div>
+    <div class="feedback" id="fb-g2"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn green" onclick="nextPage()">➡️ Siguiente: Nūn Sakinah y Tanwīn</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 5: QALQALAH (placed in slot 7 visually due to old number, will be after Mim) -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>💥 Lección 6: La Qalqalah (القلقلة)</h2>
+  
+  <div class="info-box">
+    <h4>¿Qué significa Qalqalah?</h4>
+    <p>La palabra <strong>Qalqalah</strong> significa un <strong>pequeño rebote</strong> del sonido.</p>
+    <p>❌ <strong>No</strong> significa añadir una vocal.</p>
+    <p>✅ Simplemente hacemos una <strong>ligera vibración</strong> cuando pronunciamos una letra con Sukūn.</p>
+  </div>
+  
+  <h3>🔤 Las 5 letras de Qalqalah</h3>
+  <div class="card yellow">
+    <div style="text-align:center;font-size:60px;margin:15px 0" class="arabic">
+      <span style="color:var(--naranja)">ق</span> &nbsp;
+      <span style="color:var(--naranja)">ط</span> &nbsp;
+      <span style="color:var(--naranja)">ب</span> &nbsp;
+      <span style="color:var(--naranja)">ج</span> &nbsp;
+      <span style="color:var(--naranja)">د</span>
+    </div>
+    <p style="text-align:center;font-size:18px;font-weight:700;color:var(--naranja)">
+      👉 Palabra para recordarlas: <span class="arabic" style="color:var(--naranja)">قَطْبُ جَدٍ</span> (Qaṭbun Jadin) 👈
+    </p>
+  </div>
+  
+  <h3>🌟 Ejemplo</h3>
+  <div class="card green">
+    <div style="text-align:center;margin:20px 0">
+      <div class="arabic-card" style="display:inline-block">
+        <div class="word" style="font-size:60px"><span style="color:#666">أَحَ</span><span class="highlight-madd">دْ</span></div>
+        <div class="label">Aḥad (uno) - la د lleva Qalqalah</div>
+        <button class="audio-btn" onclick="speakArabic('أحد')">🔊 Escuchar</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- QUIZ -->
+  <h2>🎮 Mini Quiz: Qalqalah</h2>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿Cuántas letras de Qalqalah hay?</div>
+    <div class="options" id="q_q1">
+      <div class="option" data-correct="false">A) Tres</div>
+      <div class="option" data-correct="true">B) Cinco</div>
+      <div class="option" data-correct="false">C) Siete</div>
+    </div>
+    <div class="feedback" id="fb-q_q1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ ¿La Qalqalah es...?</div>
+    <div class="options" id="q_q2">
+      <div class="option" data-correct="false">A) Añadir una vocal</div>
+      <div class="option" data-correct="true">B) Un pequeño rebote del sonido</div>
+      <div class="option" data-correct="false">C) Alargar la letra</div>
+    </div>
+    <div class="feedback" id="fb-q_q2"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">3️⃣ ¿Cuáles son las letras de Qalqalah?</div>
+    <div class="options" id="q_q3">
+      <div class="option" data-correct="false">A) ق، ط، ت، ث، ج</div>
+      <div class="option" data-correct="true">B) ق، ط، ب، ج، د</div>
+      <div class="option" data-correct="false">C) ب، ت، ث، ن، م</div>
+    </div>
+    <div class="feedback" id="fb-q_q3"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn green" onclick="nextPage()">➡️ Siguiente: Lām de Allah</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 6: LĀM DE ALLAH -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>🟢 Lección 7: La letra Lām de Allah (الله)</h2>
+  
+  <div class="info-box">
+    <h4>¿Qué es la Lām?</h4>
+    <p>La <strong>Lām</strong> <span class="arabic" style="font-size:24px;color:var(--verde)">ل</span> es una letra especial que aparece en la palabra <span class="arabic" style="font-size:24px;color:var(--verde)">الله</span> (Allah). Su pronunciación puede ser <strong>fuerte</strong> 🔊 o <strong>suave</strong> 🤫.</p>
+  </div>
+  
+  <h2>🔊 La Lām fuerte (Tafjīm)</h2>
+  <div class="card green">
+    <h3>¿Cuándo la Lām es fuerte?</h3>
+    <p>La Lām se pronuncia <strong>fuerte</strong> cuando:</p>
+    <ul class="custom">
+      <li>✅ Hay <strong style="color:var(--naranja)">Fatḥah</strong> (حركة فتح) antes de Allah.</li>
+      <li>✅ Hay <strong style="color:var(--verde)">Ḍammah</strong> (حركة ضم) antes de Allah.</li>
+      <li>✅ Empezamos leyendo con la palabra Allah o Allāhumma.</li>
+    </ul>
+  </div>
+  
+  <h3>📌 Ejemplos con Lām fuerte</h3>
+  <div class="dragdrop-area">
+    <div class="drag-pool">
+      <div class="arabic-card" style="margin:5px">
+        <div class="word">
+          <span style="color:#666">يَشَاءُ </span>
+          <span class="highlight-lam">اللَّهُ</span>
+        </div>
+        <div class="label">Yashā'u Allāhu</div>
+        <button class="audio-btn" onclick="speakArabic('يشاء الله')">🔊 Escuchar</button>
+      </div>
+      <div class="arabic-card" style="margin:5px">
+        <div class="word">
+          <span style="color:#666">سُبْحَانَ </span>
+          <span class="highlight-lam">اللَّهِ</span>
+        </div>
+        <div class="label">Subḥāna Allāhi</div>
+        <button class="audio-btn" onclick="speakArabic('سبحان الله')">🔊 Escuchar</button>
+      </div>
+      <div class="arabic-card" style="margin:5px">
+        <div class="word">
+          <span class="highlight-lam">اللَّهُ</span>
+        </div>
+        <div class="label">Allāhu (al comenzar)</div>
+        <button class="audio-btn" onclick="speakArabic('الله')">🔊 Escuchar</button>
+      </div>
+      <div class="arabic-card" style="margin:5px">
+        <div class="word">
+          <span class="highlight-lam">اللَّهُمَّ</span>
+        </div>
+        <div class="label">Allāhumma (al comenzar)</div>
+        <button class="audio-btn" onclick="speakArabic('اللهم')">🔊 Escuchar</button>
+      </div>
+    </div>
+  </div>
+  
+  <h2>🤫 La Lām suave (Tarqīq)</h2>
+  <div class="card blue">
+    <h3>¿Cuándo la Lām es suave?</h3>
+    <p>La Lām se pronuncia <strong>suave</strong> cuando hay <strong style="color:var(--azul)">Kasrah</strong> (حركة كسر) antes de Allah.</p>
+  </div>
+  
+  <h3>📌 Ejemplos con Lām suave</h3>
+  <div class="dragdrop-area">
+    <div class="drag-pool">
+      <div class="arabic-card" style="margin:5px;border-color:var(--azul)">
+        <div class="word">
+          <span class="highlight-kasrah">دِينِ</span>
+          <span style="color:#666"> </span>
+          <span class="highlight-lam" style="color:var(--azul)">اللَّهِ</span>
+        </div>
+        <div class="label">Dīni Allāhi</div>
+        <button class="audio-btn" onclick="speakArabic('دين الله')">🔊 Escuchar</button>
+      </div>
+      <div class="arabic-card" style="margin:5px;border-color:var(--azul)">
+        <div class="word">
+          <span style="color:#666">قُلْ </span>
+          <span class="highlight-lam" style="color:var(--azul)">اللَّهُمَّ</span>
+        </div>
+        <div class="label">Qul Allāhumma</div>
+        <button class="audio-btn" onclick="speakArabic('قل اللهم')">🔊 Escuchar</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="info-box success">
+    <h4>💡 Recuerda</h4>
+    <p>🔊 <strong>Fatḥah o Ḍammah</strong> antes de الله = <strong>Lām fuerte</strong><br>
+    🤫 <strong>Kasrah</strong> antes de الله = <strong>Lām suave</strong></p>
+  </div>
+  
+  <!-- DRAG AND DROP GAME -->
+  <h2>🎮 Mini Juego: Arrastra las palabras</h2>
+  <p>Arrastra cada palabra a la categoría correcta:</p>
+  <div class="dragdrop-area" id="lamGame">
+    <div class="drag-pool" id="lamPool">
+      <div class="drag-item" draggable="true" data-type="fuerte" data-id="1">اللَّهُ</div>
+      <div class="drag-item" draggable="true" data-type="suave" data-id="2">دِينِ اللَّهِ</div>
+      <div class="drag-item" draggable="true" data-type="fuerte" data-id="3">سُبْحَانَ اللَّهِ</div>
+      <div class="drag-item" draggable="true" data-type="suave" data-id="4">قُلِ اللَّهُمَّ</div>
+    </div>
+    <div class="dropzones">
+      <div class="dropzone green" data-type="fuerte">
+        <h4>🔊 Lām Fuerte</h4>
+        <p style="text-align:center;color:#888">(Fatḥah/Ḍammah)</p>
+      </div>
+      <div class="dropzone blue" data-type="suave">
+        <h4>🤫 Lām Suave</h4>
+        <p style="text-align:center;color:#888">(Kasrah)</p>
+      </div>
+    </div>
+    <div class="feedback" id="lamFb"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">❓ 1. ¿Cuándo la Lām de Allah es fuerte?</div>
+    <div class="options" id="l1">
+      <div class="option" data-correct="false">A) Cuando hay Kasrah</div>
+      <div class="option" data-correct="true">B) Cuando hay Fatḥah o Ḍammah</div>
+      <div class="option" data-correct="false">C) Siempre es fuerte</div>
+    </div>
+    <div class="feedback" id="fb-l1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">❓ 2. ¿La palabra "دِينِ اللَّهِ" tiene Lām fuerte o suave?</div>
+    <div class="options" id="l2">
+      <div class="option" data-correct="false">A) Fuerte 🔊</div>
+      <div class="option" data-correct="true">B) Suave 🤫</div>
+      <div class="option" data-correct="false">C) Las dos</div>
+    </div>
+    <div class="feedback" id="fb-l2"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn green" onclick="nextPage()">➡️ Siguiente: Al-Madd</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 7: AL-MADD -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>⏱️ Lección 8: Al-Madd (La prolongación)</h2>
+  
+  <div class="info-box">
+    <h4>¿Qué es el Madd?</h4>
+    <p><strong>Madd</strong> significa <strong>alargar</strong> una letra. Cuando lees, a veces necesitas mantener un sonido <strong>más tiempo</strong> para respetar la regla de la recitación. ✨</p>
+  </div>
+  
+  <h2>📏 ¿Cuántos tiempos?</h2>
+  <div class="card yellow">
+    <div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:15px">
+      <div style="text-align:center">
+        <div style="font-size:60px">2️⃣</div>
+        <div style="font-size:24px;font-weight:700;color:var(--azul)">2 tiempos</div>
+        <div class="beats"><div class="beat">1</div><div class="beat">2</div></div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:60px">4️⃣</div>
+        <div style="font-size:24px;font-weight:700;color:var(--naranja)">4 tiempos</div>
+        <div class="beats"><div class="beat">1</div><div class="beat">2</div><div class="beat">3</div><div class="beat">4</div></div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:60px">6️⃣</div>
+        <div style="font-size:24px;font-weight:700;color:var(--rojo)">6 tiempos</div>
+        <div class="beats"><div class="beat">1</div><div class="beat">2</div><div class="beat">3</div><div class="beat">4</div><div class="beat">5</div><div class="beat">6</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <h2>🔤 Letras del Madd (Ḥurūf al-Madd)</h2>
+  <p>Hay <strong>tres letras</strong> especiales para el Madd:</p>
+  
+  <div class="madd-letters">
+    <div class="madd-letter alif" onclick="speakArabic('الف')">
+      ا
+      <div class="vowel">Fatḥah ⬆️</div>
+    </div>
+    <div class="madd-letter waw" onclick="speakArabic('واو')">
+      و
+      <div class="vowel">Ḍammah ⬆️</div>
+    </div>
+    <div class="madd-letter ya" onclick="speakArabic('يا')">
+      ي
+      <div class="vowel">Kasrah ⬇️</div>
+    </div>
+  </div>
+  
+  <div class="info-box success">
+    <h4>📐 Regla fácil</h4>
+    <p>• <span style="color:var(--naranja);font-weight:700">Fatḥah</span> → <strong style="font-size:30px" class="arabic">ا</strong> (Alif)<br>
+    • <span style="color:var(--verde);font-weight:700">Ḍammah</span> → <strong style="font-size:30px" class="arabic">و</strong> (Waw)<br>
+    • <span style="color:var(--azul);font-weight:700">Kasrah</span> → <strong style="font-size:30px" class="arabic">ي</strong> (Yā)</p>
+  </div>
+  
+  <h2>🌬️ Letras Lin (Ḥurūf al-Līn)</h2>
+  <div class="card purple">
+    <h3>¿Qué son las Letras Lin?</h3>
+    <p>Son dos letras con <strong>Sukūn</strong> (سكون) precedidas por <strong>Fatḥah</strong>:</p>
+    <div class="madd-letters">
+      <div class="madd-letter waw" style="background:linear-gradient(135deg,var(--morado),#A78BFA)">وْ</div>
+      <div class="madd-letter ya" style="background:linear-gradient(135deg,var(--rosa),#F472B6)">يْ</div>
+    </div>
+    <p style="text-align:center;margin-top:20px"><strong>Ejemplo:</strong> <span class="arabic" style="font-size:36px;color:var(--morado)">قُرَيْش</span> (Quraysh)</p>
+  </div>
+  
+  <h2>📌 Ejemplos del Madd</h2>
+  <div class="dragdrop-area">
+    <div class="drag-pool">
+      <div class="arabic-card" style="margin:5px" onclick="speakArabic('قال')">
+        <div class="word">
+          <span style="color:#666">قَ</span><span class="highlight-madd">ا</span><span style="color:#666">لَ</span>
+        </div>
+        <div class="label">قال (qāla) - Alif Madd</div>
+        <button class="audio-btn">🔊 Escuchar</button>
+      </div>
+      <div class="arabic-card" style="margin:5px" onclick="speakArabic('قيل')">
+        <div class="word">
+          <span style="color:#666">قِ</span><span class="highlight-madd">ي</span><span style="color:#666">لَ</span>
+        </div>
+        <div class="label">قيل (qīla) - Yā Madd</div>
+        <button class="audio-btn">🔊 Escuchar</button>
+      </div>
+      <div class="arabic-card" style="margin:5px" onclick="speakArabic('يقول')">
+        <div class="word">
+          <span style="color:#666">يَقُ</span><span class="highlight-madd">و</span><span style="color:#666">لُ</span>
+        </div>
+        <div class="label">يقول (yaqūlu) - Waw Madd</div>
+        <button class="audio-btn">🔊 Escuchar</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- QUIZ -->
+  <h2>🎮 Mini Quiz: Al-Madd</h2>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿Cuántas letras de Madd hay?</div>
+    <div class="options" id="m1">
+      <div class="option" data-correct="false">A) Dos</div>
+      <div class="option" data-correct="true">B) Tres (ا، و، ي)</div>
+      <div class="option" data-correct="false">C) Cinco</div>
+    </div>
+    <div class="feedback" id="fb-m1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ ¿Qué significa "Madd"?</div>
+    <div class="options" id="m2">
+      <div class="option" data-correct="false">A) Bajar la voz</div>
+      <div class="option" data-correct="true">B) Alargar la pronunciación</div>
+      <div class="option" data-correct="false">C) Leer rápido</div>
+    </div>
+    <div class="feedback" id="fb-m2"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn green" onclick="nextPage()">➡️ Tipos de Madd</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 8: TIPOS DE MADD -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>🎯 Lección 9: Tipos de Madd</h2>
+  
+  <!-- MADD ASLÍ -->
+  <div class="card green">
+    <h3>⭐ Madd Aslī (Prolongación natural)</h3>
+    <p>Es la prolongación <strong>natural</strong> y siempre dura:</p>
+    <div style="text-align:center;margin:15px 0">
+      <span class="timer">⭐ 2 TIEMPOS</span>
+    </div>
+    <div class="beats">
+      <div class="beat">1</div>
+      <div class="beat">2</div>
+    </div>
+    <p style="text-align:center"><strong>Ejemplo:</strong> <span class="arabic" style="font-size:32px">قَالَ</span> (qāla)</p>
+  </div>
+  
+  <!-- MADD ĀRIḌ -->
+  <div class="card blue">
+    <h3>🛑 Madd 'Āriḍ li-s-Sukūn</h3>
+    <p>Aparece cuando <strong>nos detenemos</strong> al final de una palabra. Solo existe al hacer <strong>waqf</strong> (parada).</p>
+    <p>Puede prolongarse:</p>
+    <div style="display:flex;justify-content:space-around;margin:15px 0;flex-wrap:wrap;gap:10px">
+      <div style="text-align:center">
+        <div style="font-size:50px">2️⃣</div>
+        <div style="font-weight:700">2 tiempos</div>
+        <div class="beats"><div class="beat">1</div><div class="beat">2</div></div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:50px">4️⃣</div>
+        <div style="font-weight:700">4 tiempos</div>
+        <div class="beats"><div class="beat">1</div><div class="beat">2</div><div class="beat">3</div><div class="beat">4</div></div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:50px">6️⃣</div>
+        <div style="font-weight:700">6 tiempos</div>
+        <div class="beats"><div class="beat">1</div><div class="beat">2</div><div class="beat">3</div><div class="beat">4</div><div class="beat">5</div><div class="beat">6</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="info-box">
+    <h4>📖 Ejemplos de Madd 'Āriḍ</h4>
+    <p style="text-align:center"><span class="arabic" style="font-size:24px">قُلْ أَعُوذُ بِرَبِّ النَّاسِ</span></p>
+    <p style="text-align:center"><span class="arabic" style="font-size:24px">قُلْ يَا أَيُّهَا الْكَافِرُونَ</span></p>
+    <p style="text-align:center"><span class="arabic" style="font-size:24px">لَكُمْ دِينُكُمْ وَلِيَ دِينِ</span></p>
+  </div>
+  
+  <!-- MADD WĀJIB -->
+  <div class="card orange">
+    <h3>🔥 Madd Wājib Muttasil</h3>
+    <p>Cuando una letra de <strong>Madd</strong> va seguida de una <strong>Hamzah</strong> <span class="arabic" style="color:var(--rojo)">ء</span> en la <strong>misma palabra</strong>:</p>
+    <div style="text-align:center;margin:15px 0">
+      <span class="timer">⏰ 4-5 TIEMPOS</span>
+    </div>
+    <div class="beats">
+      <div class="beat">1</div>
+      <div class="beat">2</div>
+      <div class="beat">3</div>
+      <div class="beat">4</div>
+    </div>
+    <p style="text-align:center"><strong>Ejemplo:</strong> <span class="arabic" style="font-size:36px">السَّمَ<span style="color:var(--rojo)">ا</span>ء</span> (as-Samā')</p>
+  </div>
+  
+  <!-- MADD LĀZIM -->
+  <div class="card" style="border-color:var(--rojo);background:linear-gradient(135deg,#FEF2F2,#FECACA)">
+    <h3>🌊 Madd Lāzim</h3>
+    <p>Si después de una letra de Madd hay una letra con <strong>Shaddah</strong> (ّ) o Sukūn original:</p>
+    <div style="text-align:center;margin:15px 0">
+      <span class="timer">⏰ 6 TIEMPOS</span>
+    </div>
+    <div class="beats">
+      <div class="beat">1</div>
+      <div class="beat">2</div>
+      <div class="beat">3</div>
+      <div class="beat">4</div>
+      <div class="beat">5</div>
+      <div class="beat">6</div>
+    </div>
+    <p style="text-align:center"><strong>Ejemplo:</strong> <span class="arabic" style="font-size:32px">وَلَا الضَّاّلِّينَ</span></p>
+  </div>
+  
+  <!-- COMPARISON TABLE -->
+  <h2>📊 Resumen: Tipos de Madd</h2>
+  <div class="card yellow" style="overflow-x:auto">
+    <table>
+      <tr>
+        <th>Tipo de Madd</th>
+        <th>Tiempos</th>
+        <th>Símbolo</th>
+      </tr>
+      <tr><td><strong>Madd Aslī</strong></td><td>2</td><td>⭐</td></tr>
+      <tr><td><strong>Madd 'Āriḍ</strong></td><td>2 / 4 / 6</td><td>🛑</td></tr>
+      <tr><td><strong>Madd Wājib Muttasil</strong></td><td>4 - 5</td><td>🔥</td></tr>
+      <tr><td><strong>Madd Lāzim</strong></td><td>6</td><td>🌊</td></tr>
+    </table>
+  </div>
+  
+  <!-- QUIZ -->
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿Cuántos tiempos tiene Madd Aslī?</div>
+    <div class="options" id="tm1">
+      <div class="option" data-correct="false">A) 4 tiempos</div>
+      <div class="option" data-correct="true">B) 2 tiempos</div>
+      <div class="option" data-correct="false">C) 6 tiempos</div>
+    </div>
+    <div class="feedback" id="fb-tm1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ ¿Cuántos tiempos tiene Madd Lāzim?</div>
+    <div class="options" id="tm2">
+      <div class="option" data-correct="false">A) 2 tiempos</div>
+      <div class="option" data-correct="false">B) 4 tiempos</div>
+      <div class="option" data-correct="true">C) 6 tiempos</div>
+    </div>
+    <div class="feedback" id="fb-tm2"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">3️⃣ ¿Cuándo aparece Madd 'Āriḍ?</div>
+    <div class="options" id="tm3">
+      <div class="option" data-correct="false">A) Cuando hay Hamzah</div>
+      <div class="option" data-correct="true">B) Cuando nos detenemos al final</div>
+      <div class="option" data-correct="false">C) Al comenzar</div>
+    </div>
+    <div class="feedback" id="fb-tm3"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn green" onclick="nextPage()">➡️ Siguiente: La letra Rā</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 9: LA LETRA RĀ -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>🔴 Lección 10: La letra Rā (ر)</h2>
+  
+  <div class="info-box">
+    <h4>¿Qué es la Rā?</h4>
+    <p>La <strong>Rā</strong> <span class="arabic" style="font-size:24px;color:var(--morado)">ر</span> es una letra árabe. Su pronunciación puede ser <strong>fuerte</strong> 🔴 o <strong>suave</strong> 🟢, dependiendo de la vocal que tenga.</p>
+  </div>
+  
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px;margin:20px 0">
+    <div class="card" style="border:4px solid var(--rojo);background:linear-gradient(135deg,#FEF2F2,#FECACA)">
+      <h3 style="color:var(--rojo);text-align:center">🔴 Rā Fuerte</h3>
+      <p style="text-align:center"><strong>Con Fatḥah o Ḍammah</strong></p>
+      <div style="text-align:center;margin:15px 0">
+        <div class="arabic-card" style="display:inline-block;margin:5px" onclick="speakArabic('ربك')">
+          <div class="word"><span class="highlight-ra" style="background:#FECACA;color:var(--rojo)">رَبِّكَ</span></div>
+          <button class="audio-btn">🔊</button>
+        </div>
+        <div class="arabic-card" style="display:inline-block;margin:5px" onclick="speakArabic('رسل')">
+          <div class="word"><span class="highlight-ra" style="background:#FECACA;color:var(--rojo)">رُسُل</span></div>
+          <button class="audio-btn">🔊</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card" style="border:4px solid var(--verde);background:linear-gradient(135deg,#ECFDF5,#D1FAE5)">
+      <h3 style="color:var(--verde);text-align:center">🟢 Rā Suave</h3>
+      <p style="text-align:center"><strong>Con Kasrah</strong></p>
+      <div style="text-align:center;margin:15px 0">
+        <div class="arabic-card" style="display:inline-block;margin:5px;border-color:var(--verde)" onclick="speakArabic('كريم')">
+          <div class="word"><span class="highlight-ra" style="background:#D1FAE5;color:var(--verde)">كَرِيم</span></div>
+          <button class="audio-btn" style="background:linear-gradient(90deg,var(--verde),var(--verde-claro))">🔊</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <h2>⚠️ Casos especiales de la Rā</h2>
+  <div class="card yellow">
+    <h3>Casos especiales</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:15px">
+      <div class="arabic-card" onclick="speakArabic('ارتوى')">
+        <div class="word" style="font-size:24px">ا<span class="highlight-ra" style="background:#FECACA;color:var(--rojo)">رْ</span>تَضَى</div>
+        <div class="label">ارْتَضَى (fuerte)</div>
+      </div>
+      <div class="arabic-card" onclick="speakArabic('خير')">
+        <div class="word" style="font-size:24px">خَ<span class="highlight-ra" style="background:#D1FAE5;color:var(--verde)">يْ</span>ر</div>
+        <div class="label">خَيْر (suave)</div>
+      </div>
+      <div class="arabic-card" onclick="speakArabic('غير')">
+        <div class="word" style="font-size:24px">غَ<span class="highlight-ra" style="background:#D1FAE5;color:var(--verde)">يْ</span>ر</div>
+        <div class="label">غَيْر (suave)</div>
+      </div>
+      <div class="arabic-card" onclick="speakArabic('القرطاس')">
+        <div class="word" style="font-size:20px">الْقَ<span class="highlight-ra" style="background:#FECACA;color:var(--rojo)">رْ</span>طَاس</div>
+        <div class="label">الْقَرْطَاس (fuerte)</div>
+      </div>
+      <div class="arabic-card" onclick="speakArabic('سخر')">
+        <div class="word" style="font-size:24px">سَخْ<span class="highlight-ra" style="background:#FECACA;color:var(--rojo)">رْ</span></div>
+        <div class="label">سَخْر (fuerte)</div>
+      </div>
+      <div class="arabic-card" onclick="speakArabic('الشرك')">
+        <div class="word" style="font-size:24px">الشِ<span class="highlight-ra" style="background:#D1FAE5;color:var(--verde)">رْ</span>ك</div>
+        <div class="label">الشِّرْك (suave)</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- QUIZ -->
+  <h2>🎮 Mini Quiz: La Rā</h2>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ La palabra "رَبِّكَ": ¿la Rā es fuerte o suave?</div>
+    <div class="options" id="r1">
+      <div class="option" data-correct="true">A) 🔴 Fuerte</div>
+      <div class="option" data-correct="false">B) 🟢 Suave</div>
+    </div>
+    <div class="feedback" id="fb-r1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ La palabra "كَرِيم": ¿la Rā es fuerte o suave?</div>
+    <div class="options" id="r2">
+      <div class="option" data-correct="false">A) 🔴 Fuerte</div>
+      <div class="option" data-correct="true">B) 🟢 Suave</div>
+    </div>
+    <div class="feedback" id="fb-r2"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">3️⃣ La palabra "الشِّرْك": ¿la Rā es fuerte o suave?</div>
+    <div class="options" id="r3">
+      <div class="option" data-correct="false">A) 🔴 Fuerte</div>
+      <div class="option" data-correct="true">B) 🟢 Suave</div>
+    </div>
+    <div class="feedback" id="fb-r3"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn gold" onclick="nextPage()">🏆 Examen Final</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 5: REGLAS DE NŪN SĀKINAH Y TANWIN -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>📜 Lección 4: Reglas de Nūn Sākinah y Tanwīn</h2>
+  
+  <div class="info-box">
+    <h4>📖 ¿Qué es la Nūn Sākinah?</h4>
+    <p>La <strong>Nūn Sākinah</strong> <span class="arabic" style="font-size:24px;color:var(--rosa)">نْ</span> es la letra <strong>nūn</strong> que se lee con <strong>sukūn</strong> (sin vocal).</p>
+    <p>El <strong>Tanwīn</strong> es la <strong>doble</strong> de la última vocal corta de una palabra y siempre está al final de la palabra: <span class="arabic" style="color:var(--rosa)">ـٌ ـً ـٍ</span></p>
+    <p>El sonido de tanwīn suena igual a <strong>nūn sākinah</strong>. Por esta similitud, <strong>ambos tienen las mismas reglas</strong> de lectura.</p>
+  </div>
+  
+  <h3>📊 Tipos de Tanwīn</h3>
+  <div class="card yellow">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="text-align:center;background:#FEF3C7;padding:15px;border-radius:15px">
+        <div class="arabic" style="font-size:30px;color:var(--naranja)">ـً</div>
+        <p style="margin-top:8px"><strong>Fatḥatain</strong></p>
+        <p style="font-size:13px">suena = <strong>an</strong></p>
+      </div>
+      <div style="text-align:center;background:#DBEAFE;padding:15px;border-radius:15px">
+        <div class="arabic" style="font-size:30px;color:var(--azul)">ـٍ</div>
+        <p style="margin-top:8px"><strong>Kasratain</strong></p>
+        <p style="font-size:13px">suena = <strong>in</strong></p>
+      </div>
+      <div style="text-align:center;background:#D1FAE5;padding:15px;border-radius:15px">
+        <div class="arabic" style="font-size:30px;color:var(--verde)">ـٌ</div>
+        <p style="margin-top:8px"><strong>Ḍammatain</strong></p>
+        <p style="font-size:13px">suena = <strong>un</strong></p>
+      </div>
+    </div>
+  </div>
+  
+  <h2>🌟 Las 4 reglas de la Nūn Sākinah y Tanwīn</h2>
+  
+  <!-- 1. IDH-HAR -->
+  <div class="card green">
+    <h3>1️⃣ Idh-har (الإظهار) - CLARO</h3>
+    <p><strong>Idh-har</strong> significa <strong>CLARO</strong>.</p>
+    <p>Leemos la nūn sākinah o tanwīn <strong>con claridad</strong>, cuando se encuentra antes de las letras de la <strong>garganta</strong>.</p>
+    <div class="info-box success" style="margin-top:10px">
+      <h4>🔤 Las 6 letras de la garganta (Halq)</h4>
+      <div style="text-align:center;font-size:36px;margin:10px 0" class="arabic">
+        <span style="color:var(--verde)">ء</span> 
+        <span style="color:var(--verde)">هـ</span> 
+        <span style="color:var(--verde)">ع</span> 
+        <span style="color:var(--verde)">ح</span> 
+        <span style="color:var(--verde)">غ</span> 
+        <span style="color:var(--verde)">خ</span>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:10px"><strong>Ejemplo:</strong> <span class="arabic" style="font-size:30px;color:var(--verde)">مِنْ خَوْفٍ</span> (min jawf)</p>
+  </div>
+  
+  <!-- 2. IDGHAM -->
+  <div class="card blue">
+    <h3>2️⃣ Idghām (الإدغام) - MEZCLAR</h3>
+    <p><strong>Idghām</strong> significa <strong>MEZCLAR</strong>.</p>
+    <p>Mezclamos o fusionamos el sonido de la nūn con la letra siguiente.</p>
+    <p>Tiene <strong>2 casos</strong>:</p>
+    
+    <h4>📌 Con Ghunnah (نّ، مّ، و، ي):</h4>
+    <div style="text-align:center;font-size:30px;margin:10px 0" class="arabic">
+      <span style="color:var(--azul)">ي</span> 
+      <span style="color:var(--azul)">م</span> 
+      <span style="color:var(--azul)">و</span> 
+      <span style="color:var(--azul)">ن</span>
+    </div>
+    <p><strong>Paso 1:</strong> La letra nūn cae.<br>
+    <strong>Paso 2:</strong> Juntar la letra anterior a nūn con la letra que sigue después de nūn.<br>
+    <strong>Paso 3:</strong> Realizar el ghunna.</p>
+    
+    <h4>📌 Sin Ghunnah (ل، ر):</h4>
+    <div style="text-align:center;font-size:30px;margin:10px 0" class="arabic">
+      <span style="color:var(--azul)">ل</span> 
+      <span style="color:var(--azul)">ر</span>
+    </div>
+    <p style="text-align:center;margin-top:10px"><strong>Ejemplo:</strong> <span class="arabic" style="font-size:30px;color:var(--azul)">مِنْ رَبِّهِمْ</span> (min rabbihim)</p>
+  </div>
+  
+  <!-- 3. IQLAB -->
+  <div class="card orange">
+    <h3>3️⃣ Iqlāb (الإقلاب) - DAR VUELTA</h3>
+    <p><strong>Iqlāb</strong> significa <strong>DAR VUELTA</strong>.</p>
+    <p>Siempre convertimos el sonido de la <strong>nūn</strong> a <strong>mīm</strong> cuando nūn está antes de la letra <strong>bā</strong> <span class="arabic" style="color:var(--naranja)">ب</span>.</p>
+    <div style="text-align:center;margin:15px 0">
+      <div class="arabic-card" style="display:inline-block;border-color:var(--naranja)">
+        <div class="word" style="font-size:60px;color:var(--naranja)">ب</div>
+        <div class="label">Única letra: Bā</div>
+      </div>
+    </div>
+    <div class="info-box warn" style="margin-top:10px">
+      <h4>📢 Pronunciación</h4>
+      <p>👄 <strong>Con ghunna</strong> sin apretar los labios.</p>
+    </div>
+    <p style="text-align:center;margin-top:10px"><strong>Ejemplo en el Qur'an:</strong> En el sagrado Qur'an aparece una letra mīm pequeña arriba de la letra nūn, como señal de que debemos convertir el sonido de nūn en mīm.</p>
+    <div style="text-align:center;margin:15px 0">
+      <span class="arabic" style="font-size:36px;color:var(--naranja)">نْ‌ب → مْ‌ب</span>
+    </div>
+    <p style="text-align:center"><strong>Ejemplo:</strong> <span class="arabic" style="font-size:30px;color:var(--naranja)">أَنْبِئُهُمْ</span> (anbi'uhum)</p>
+  </div>
+  
+  <!-- 4. IKHFA -->
+  <div class="card purple">
+    <h3>4️⃣ Ikhfā' (الإخفاء) - OCULTAR</h3>
+    <p><strong>Ikhfā</strong> significa <strong>OCULTAR</strong>.</p>
+    <p>La nūn ikhfā debe <strong>acercar su sonido al makhraj</strong> de la siguiente letra. Por ejemplo: Si la siguiente letra es gruesa, la ghunna debe ser fuerte, pero si la siguiente letra es suave el ghunna debe ser suave también.</p>
+    <div class="info-box success" style="margin-top:10px">
+      <h4>🔤 Las 15 letras de Ikhfā</h4>
+      <p style="text-align:center;font-size:24px;line-height:2" class="arabic">
+        <span style="color:var(--morado)">ت</span> 
+        <span style="color:var(--morado)">ث</span> 
+        <span style="color:var(--morado)">ج</span> 
+        <span style="color:var(--morado)">د</span> 
+        <span style="color:var(--morado)">ذ</span> &nbsp;
+        <span style="color:var(--morado)">ز</span> 
+        <span style="color:var(--morado)">س</span> 
+        <span style="color:var(--morado)">ش</span> &nbsp;
+        <span style="color:var(--morado)">ص</span> 
+        <span style="color:var(--morado)">ض</span> 
+        <span style="color:var(--morado)">ط</span> 
+        <span style="color:var(--morado)">ظ</span> &nbsp;
+        <span style="color:var(--morado)">ف</span> 
+        <span style="color:var(--morado)">ق</span> 
+        <span style="color:var(--morado)">ك</span>
+      </p>
+      <p style="text-align:center">⏰ <strong>Siempre con ghunna de 2 tiempos</strong></p>
+    </div>
+    <p style="text-align:center;margin-top:10px"><strong>Ejemplo:</strong> <span class="arabic" style="font-size:30px;color:var(--morado)">أَنْزَلَ</span> (anzala)</p>
+    
+    <h4>💪 Ghunnah fuerte</h4>
+    <p style="text-align:center">Con: <span class="arabic" style="font-size:24px;color:var(--naranja)">ص - ض - ط - ظ - ق - غ - خ</span></p>
+    <h4>🤍 Ghunnah suave</h4>
+    <p style="text-align:center">Con las <strong>demás letras</strong> (ت، ث، ج، د، ذ، ز، س، ش، ف، ك)</p>
+  </div>
+  
+  <h2>📊 Resumen: Las 4 reglas de la Nūn Sākinah y Tanwīn</h2>
+  <div class="card yellow" style="overflow-x:auto">
+    <table>
+      <tr style="background:linear-gradient(90deg,var(--rosa),var(--morado));color:white">
+        <th>Regla</th>
+        <th>Significado</th>
+        <th>Letras</th>
+        <th>¿Ghunnah?</th>
+      </tr>
+      <tr>
+        <td><strong>Idh-har</strong></td>
+        <td>Claro</td>
+        <td>ء، هـ، ع، ح، غ، خ</td>
+        <td>❌ No</td>
+      </tr>
+      <tr>
+        <td><strong>Idghām</strong></td>
+        <td>Mezclar</td>
+        <td>ي، م، و، ن (con ghunna) / ل، ر (sin ghunna)</td>
+        <td>✅ A veces</td>
+      </tr>
+      <tr>
+        <td><strong>Iqlāb</strong></td>
+        <td>Dar vuelta</td>
+        <td>ب (se convierte en م)</td>
+        <td>✅ Sí</td>
+      </tr>
+      <tr>
+        <td><strong>Ikhfā'</strong></td>
+        <td>Ocultar</td>
+        <td>15 letras (ت، ث، ج، د، ذ، ز، س، ش، ص، ض، ط، ظ، ف، ق، ك)</td>
+        <td>✅ Sí</td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="info-box warn">
+    <h4>⚠️ Excepciones (4 palabras)</h4>
+    <p>En el sagrado Qur'an hay <strong>4 excepciones</strong>: <strong>Idhaar Mutlaq</strong>. Esto significa que pronunciamos <strong>claramente</strong> la letra nūn, aunque esté en la misma palabra con una letra de idgham.</p>
+    <p style="text-align:center;margin-top:10px;font-size:26px" class="arabic">
+      <span style="color:var(--naranja)">صُنْوَانٍ</span> &nbsp;&nbsp; 
+      <span style="color:var(--naranja)">قُنْوَانٍ</span> &nbsp;&nbsp; 
+      <span style="color:var(--naranja)">بُنْيَانٍ</span> &nbsp;&nbsp; 
+      <span style="color:var(--naranja)">الدُّنْيَا</span>
+    </p>
+  </div>
+  
+  <!-- QUIZ -->
+  <h2>🎮 Mini Quiz: Nūn Sākinah y Tanwīn</h2>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿Cuántas reglas tiene la Nūn Sākinah y el Tanwīn?</div>
+    <div class="options" id="ns1">
+      <div class="option" data-correct="false">A) Dos</div>
+      <div class="option" data-correct="false">B) Tres</div>
+      <div class="option" data-correct="true">C) Cuatro</div>
+    </div>
+    <div class="feedback" id="fb-ns1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ ¿Qué significa "Idh-har"?</div>
+    <div class="options" id="ns2">
+      <div class="option" data-correct="true">A) Claro</div>
+      <div class="option" data-correct="false">B) Mezclar</div>
+      <div class="option" data-correct="false">C) Ocultar</div>
+    </div>
+    <div class="feedback" id="fb-ns2"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">3️⃣ La Nūn antes de ب se convierte en:</div>
+    <div class="options" id="ns3">
+      <div class="option" data-correct="false">A) Lām</div>
+      <div class="option" data-correct="true">B) Mīm (Iqlāb)</div>
+      <div class="option" data-correct="false">C) Kāf</div>
+    </div>
+    <div class="feedback" id="fb-ns3"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">4️⃣ ¿Cuántas letras de Ikhfā hay?</div>
+    <div class="options" id="ns4">
+      <div class="option" data-correct="false">A) 10</div>
+      <div class="option" data-correct="true">B) 15</div>
+      <div class="option" data-correct="false">C) 20</div>
+    </div>
+    <div class="feedback" id="fb-ns4"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn green" onclick="nextPage()">➡️ Siguiente: Reglas de Mīm Sakinah</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 6: REGLAS DE MĪM SAKINAH -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>👄 Lección 5: Reglas de Mīm Sakinah (أحكام الميم الساكنة)</h2>
+  
+  <div class="info-box">
+    <h4>¿Qué es Mīm Sakinah?</h4>
+    <p>Es una <strong>Mīm</strong> con <strong>Sukūn</strong> <span class="arabic" style="font-size:24px;color:var(--turquesa)">مْ</span>. Tiene <strong>tres reglas</strong>.</p>
+  </div>
+  
+  <!-- IKHFA SHAFAWI -->
+  <div class="card purple">
+    <h3>1️⃣ Ikhfa Shafawi (الإخفاء الشفوي)</h3>
+    <p>Se aplica cuando Mīm Sakinah está <strong>seguida por ب</strong>.</p>
+    <div style="text-align:center;margin:15px 0">
+      <span class="arabic" style="font-size:32px;color:var(--morado)">مْ + ب</span>
+    </div>
+    <h4>📢 Pronunciación:</h4>
+    <ul class="custom">
+      <li>🤫 <strong>Ocultamos</strong> un poco la Mīm.</li>
+      <li>❌ <strong>No cerramos completamente</strong> los labios.</li>
+      <li>⏰ Ghunnah de <strong>dos tiempos</strong>.</li>
+    </ul>
+  </div>
+  
+  <!-- IDGHAM SHAFAWI -->
+  <div class="card green">
+    <h3>2️⃣ Idgham Shafawi (الإدغام الشفوي)</h3>
+    <p>Se aplica cuando Mīm Sakinah está <strong>seguida por otra Mīm</strong>.</p>
+    <div style="text-align:center;margin:15px 0">
+      <span class="arabic" style="font-size:32px;color:var(--verde)">مْ + م</span>
+    </div>
+    <h4>📢 Pronunciación:</h4>
+    <ul class="custom">
+      <li>🔗 <strong>Unimos</strong> las dos Mīm.</li>
+      <li>⏰ Ghunnah de <strong>dos tiempos</strong>.</li>
+    </ul>
+  </div>
+  
+  <!-- IDH-HAR SHAFAWI -->
+  <div class="card blue">
+    <h3>3️⃣ Idh-har Shafawi (الإظهار الشفوي)</h3>
+    <p>Se aplica cuando Mīm Sakinah está seguida por <strong>cualquier letra excepto م y ب</strong>.</p>
+    <h4>📢 Pronunciación:</h4>
+    <ul class="custom">
+      <li>🔊 Mīm <strong>clara</strong>.</li>
+      <li>✅ <strong>Cerramos completamente</strong> los labios.</li>
+      <li>❌ <strong>Sin Ghunnah adicional</strong>.</li>
+    </ul>
+  </div>
+  
+  <h2>📍 Resumen visual de las 3 reglas</h2>
+  <div class="card yellow" style="overflow-x:auto">
+    <table>
+      <tr>
+        <th>Regla</th>
+        <th>Después de مْ viene</th>
+        <th>Acción</th>
+      </tr>
+      <tr>
+        <td><strong>Ikhfa Shafawi</strong></td>
+        <td>ب</td>
+        <td>Ocultar + Ghunnah 2 tiempos</td>
+      </tr>
+      <tr>
+        <td><strong>Idgham Shafawi</strong></td>
+        <td>م</td>
+        <td>Unir + Ghunnah 2 tiempos</td>
+      </tr>
+      <tr>
+        <td><strong>Idh-har Shafawi</strong></td>
+        <td>Cualquier otra letra</td>
+        <td>Mīm clara + cerrar labios</td>
+      </tr>
+    </table>
+  </div>
+  
+  <h2>📍 Signos de suspensión (علامات الوقف)</h2>
+  <div class="card cyan">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+      <div>
+        <p><span class="arabic" style="font-size:28px;color:var(--rojo)">م</span> → <strong>Debes detenerte.</strong></p>
+        <p><span class="arabic" style="font-size:28px;color:var(--naranja)">قلى</span> → Puedes detenerte, pero <strong>es mejor detenerse</strong>.</p>
+        <p><span class="arabic" style="font-size:28px;color:var(--verde)">ج</span> → Puedes <strong>detenerte o continuar</strong>.</p>
+      </div>
+      <div>
+        <p><span class="arabic" style="font-size:28px;color:var(--azul)">لا</span> → <strong>No debes detenerte.</strong></p>
+        <p><span class="arabic" style="font-size:28px;color:var(--rosa)">صلى</span> → Puedes detenerte, pero <strong>es mejor continuar</strong>.</p>
+        <p><span class="arabic" style="font-size:28px;color:var(--morado)">∴</span> → Detente en <strong>uno de los dos</strong> signos.</p>
+        <p><span class="arabic" style="font-size:28px;color:var(--turquesa)">س</span> → <strong>Saktah:</strong> pausa muy corta sin respirar.</p>
+        <p><span class="arabic" style="font-size:28px;color:var(--dorado)">۞</span> → Final de un <strong>Rub'</strong> (1/4 de Hizb).</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- QUIZ -->
+  <h2>🎮 Mini Quiz: Mīm Sakinah</h2>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿Cuántas reglas tiene Mīm Sakinah?</div>
+    <div class="options" id="ms1">
+      <div class="option" data-correct="false">A) Dos</div>
+      <div class="option" data-correct="true">B) Tres</div>
+      <div class="option" data-correct="false">C) Cuatro</div>
+    </div>
+    <div class="feedback" id="fb-ms1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ Si مْ va seguida de ب, aplicamos:</div>
+    <div class="options" id="ms2">
+      <div class="option" data-correct="false">A) Idgham Shafawi</div>
+      <div class="option" data-correct="true">B) Ikhfa Shafawi</div>
+      <div class="option" data-correct="false">C) Idh-har Shafawi</div>
+    </div>
+    <div class="feedback" id="fb-ms2"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">3️⃣ Si مْ va seguida de م, aplicamos:</div>
+    <div class="options" id="ms3">
+      <div class="option" data-correct="true">A) Idgham Shafawi</div>
+      <div class="option" data-correct="false">B) Ikhfa Shafawi</div>
+      <div class="option" data-correct="false">C) Idh-har Shafawi</div>
+    </div>
+    <div class="feedback" id="fb-ms3"></div>
+  </div>
+  
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn purple" onclick="nextPage()">➡️ Siguiente: Qalqalah</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PAGE 12: EXAMEN FINAL + CERTIFICADO -->
+<!-- ============================================ -->
+<div class="page">
+  <h2>🏆 Examen Final de Tajwid</h2>
+  
+  <div class="info-box success">
+    <h4>¡Demuestra lo que aprendiste!</h4>
+    <p>Tienes preguntas de varios tipos. Cada respuesta correcta te da ⭐ una estrella. Al final, ¡recibirás tu certificado!</p>
+  </div>
+  
+  <h2>📝 Sección 1: Opción múltiple</h2>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">1️⃣ ¿La Lām de Allah es fuerte cuando hay?</div>
+    <div class="options" id="e1">
+      <div class="option" data-correct="false">A) Kasrah</div>
+      <div class="option" data-correct="true">B) Fatḥah</div>
+      <div class="option" data-correct="false">C) Sukūn</div>
+    </div>
+    <div class="feedback" id="fb-e1"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">2️⃣ ¿Cuántos tiempos tiene Madd Aslī?</div>
+    <div class="options" id="e2">
+      <div class="option" data-correct="true">A) 2 tiempos</div>
+      <div class="option" data-correct="false">B) 4 tiempos</div>
+      <div class="option" data-correct="false">C) 6 tiempos</div>
+    </div>
+    <div class="feedback" id="fb-e2"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">3️⃣ ¿Cuáles son las letras del Madd?</div>
+    <div class="options" id="e3">
+      <div class="option" data-correct="false">A) ب، ت، ث</div>
+      <div class="option" data-correct="true">B) ا، و، ي</div>
+      <div class="option" data-correct="false">C) ل، م، ن</div>
+    </div>
+    <div class="feedback" id="fb-e3"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">4️⃣ ¿Cuántos tiempos tiene Madd Lāzim?</div>
+    <div class="options" id="e4">
+      <div class="option" data-correct="false">A) 2 tiempos</div>
+      <div class="option" data-correct="false">B) 4 tiempos</div>
+      <div class="option" data-correct="true">C) 6 tiempos</div>
+    </div>
+    <div class="feedback" id="fb-e4"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">5️⃣ La Rā con Fatḥah se pronuncia:</div>
+    <div class="options" id="e5">
+      <div class="option" data-correct="true">A) 🔴 Fuerte</div>
+      <div class="option" data-correct="false">B) 🟢 Suave</div>
+    </div>
+    <div class="feedback" id="fb-e5"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">6️⃣ ¿Cuántas letras de Qalqalah hay?</div>
+    <div class="options" id="e6">
+      <div class="option" data-correct="false">A) Tres</div>
+      <div class="option" data-correct="true">B) Cinco</div>
+      <div class="option" data-correct="false">C) Siete</div>
+    </div>
+    <div class="feedback" id="fb-e6"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">7️⃣ Si مْ va seguida de م, aplicamos:</div>
+    <div class="options" id="e7">
+      <div class="option" data-correct="true">A) Idgham Shafawi</div>
+      <div class="option" data-correct="false">B) Ikhfa Shafawi</div>
+      <div class="option" data-correct="false">C) Idh-har Shafawi</div>
+    </div>
+    <div class="feedback" id="fb-e7"></div>
+  </div>
+  
+  <div class="quiz-box">
+    <div class="quiz-q">8️⃣ ¿Cuántas letras Halqiyyah (de la garganta) hay?</div>
+    <div class="options" id="e8">
+      <div class="option" data-correct="false">A) Cuatro</div>
+      <div class="option" data-correct="true">B) Seis</div>
+      <div class="option" data-correct="false">C) Ocho</div>
+    </div>
+    <div class="feedback" id="fb-e8"></div>
+  </div>
+  
+  <h2>✔️ Sección 2: Verdadero o Falso</h2>
+  <div class="card yellow">
+    <div class="tf-row" data-correct="V">
+      <span>9️⃣ "Madd significa alargar una letra"</span>
+      <button class="tf-btn V" onclick="selectTF(this)">V</button>
+      <button class="tf-btn F" onclick="selectTF(this)">F</button>
+    </div>
+    <div class="tf-row" data-correct="V">
+      <span>🔟 "La letra Alif (ا) es una letra de Madd"</span>
+      <button class="tf-btn V" onclick="selectTF(this)">V</button>
+      <button class="tf-btn F" onclick="selectTF(this)">F</button>
+    </div>
+    <div class="tf-row" data-correct="F">
+      <span>1️⃣1️⃣ "Madd Aslī siempre dura 6 tiempos"</span>
+      <button class="tf-btn V" onclick="selectTF(this)">V</button>
+      <button class="tf-btn F" onclick="selectTF(this)">F</button>
+    </div>
+    <div class="tf-row" data-correct="V">
+      <span>1️⃣2️⃣ "La Rā con Kasrah se pronuncia suave"</span>
+      <button class="tf-btn V" onclick="selectTF(this)">V</button>
+      <button class="tf-btn F" onclick="selectTF(this)">F</button>
+    </div>
+    <div class="tf-row" data-correct="V">
+      <span>1️⃣3️⃣ "Madd Lāzim dura 6 tiempos"</span>
+      <button class="tf-btn V" onclick="selectTF(this)">V</button>
+      <button class="tf-btn F" onclick="selectTF(this)">F</button>
+    </div>
+    <div class="tf-row" data-correct="F">
+      <span>1️⃣4️⃣ "La Hamzah y el Alif son exactamente iguales"</span>
+      <button class="tf-btn V" onclick="selectTF(this)">V</button>
+      <button class="tf-btn F" onclick="selectTF(this)">F</button>
+    </div>
+    <div class="tf-row" data-correct="V">
+      <span>1️⃣5️⃣ "El Ikhfa significa ocultar el sonido de la Nun"</span>
+      <button class="tf-btn V" onclick="selectTF(this)">V</button>
+      <button class="tf-btn F" onclick="selectTF(this)">F</button>
+    </div>
+  </div>
+  
+  <h2>✏️ Sección 3: Completa</h2>
+  <div class="fillin card purple" style="border:none;background:linear-gradient(135deg,#F5F3FF,#EDE9FE)">
+    <p>1️⃣6️⃣ Madd significa <input type="text" class="blank" id="f1" placeholder="...">.</p>
+    <p>1️⃣7️⃣ Madd Aslī dura <input type="text" class="blank" id="f2" placeholder="..." style="width:80px"> tiempos.</p>
+    <p>1️⃣8️⃣ La Rā con Kasrah se pronuncia <input type="text" class="blank" id="f3" placeholder="..." style="width:120px">.</p>
+    <p>1️⃣9️⃣ La Lām de Allah es <input type="text" class="blank" id="f4" placeholder="..." style="width:120px"> cuando hay Kasrah.</p>
+    <p>2️⃣0️⃣ Las letras del Madd son: <input type="text" class="blank" id="f5" placeholder="..." style="width:180px">.</p>
+    <div class="info-box success" style="margin-top:15px">
+      <h4>💡 Respuestas</h4>
+      <p>16: alargar | 17: 2 | 18: suave | 19: suave | 20: ا، و، ي</p>
+    </div>
+  </div>
+  
+  <div style="text-align:center;margin:20px 0">
+    <button class="btn green" onclick="checkFinal()">✅ Ver mi puntuación</button>
+    <button class="btn orange" onclick="resetAll()">🔄 Reiniciar</button>
+  </div>
+  
+  <!-- RESULT -->
+  <div class="card" id="resultCard" style="display:none;text-align:center;background:linear-gradient(135deg,#FEF3C7,#FED7AA)">
+    <div style="font-size:80px;margin:15px 0">🎉</div>
+    <h3 id="resultTitle" style="font-size:28px;color:var(--azul-oscuro)"></h3>
+    <div style="font-size:40px;font-weight:700;margin:15px 0">
+      <span id="finalScore">0</span> / 20
+    </div>
+    <div class="stars" id="finalStars" style="font-size:40px"></div>
+    <p id="resultMsg" style="font-size:18px;margin:15px 0"></p>
+  </div>
+  
+  <!-- CERTIFICATE -->
+  <div class="certificate" id="certificate" style="display:none">
+    <div class="cert-trophy">🏆</div>
+    <div class="cert-title">Certificado de Tajwid</div>
+    <p style="font-size:18px">Se otorga el presente certificado a:</p>
+    <div class="cert-name" id="certName">Pequeño Estudiante</div>
+    <p style="font-size:16px">Por completar exitosamente el curso de revisión de Tajwid</p>
+    <div class="cert-score">Puntuación: <span id="certScore">0</span> / 20 ⭐</div>
+    <p class="cert-date">📅 <span id="certDate"></span></p>
+    <div class="cert-signature">
+      <p style="font-size:24px;font-family:'Amiri'">مدير المدرسة</p>
+      <p style="font-size:14px">Director de la Escuela</p>
+    </div>
+    <button class="btn gold" onclick="printCert()" style="margin-top:20px">🖨️ Imprimir Certificado</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+// === NAVIGATION ===
+let currentPage = 1;
+const totalPages = 12;
+let totalScore = 0;
+
+function goToPage(n){
+  showPage(n);
+}
+
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.page')[n-1].classList.add('active');
+  document.getElementById('current').textContent = n;
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextPage(){if(currentPage<totalPages){currentPage++;showPage(currentPage)}}
+function prevPage(){if(currentPage>1){currentPage--;showPage(currentPage)}}
+
+function updateProgress(){
+  const pct = Math.round((currentPage-1)/(totalPages-1)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = pct+'%';
+}
+
+// === CONFETTI ===
+function confetti(){
+  const colors = ['#FF6B6B','#4ECDC4','#FFE66D','#95E77E','#B983FF','#FF8FAB'];
+  for(let i=0;i<50;i++){
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random()*100+'vw';
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration = (Math.random()*2+2)+'s';
+    c.style.animationDelay = Math.random()*0.5+'s';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
+// === AUDIO (Web Speech API) ===
+function speakArabic(text){
+  if('speechSynthesis' in window){
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.7;
+    u.pitch = 1;
+    window.speechSynthesis.speak(u);
+  } else {
+    alert('Tu navegador no soporta audio 🔇');
+  }
+}
+
+// === QUIZ HANDLERS ===
+document.querySelectorAll('.option').forEach(opt=>{
+  opt.addEventListener('click',function(){
+    const parent = this.parentElement;
+    if(parent.querySelector('.option.correct,.option.wrong')) return;
+    const correct = this.dataset.correct === 'true';
+    this.classList.add(correct?'correct':'wrong');
+    parent.querySelectorAll('.option').forEach(o=>{
+      if(o.dataset.correct==='true')o.classList.add('correct');
+    });
+    const fb = document.getElementById('fb-'+parent.id);
+    if(fb){
+      fb.className='feedback show '+(correct?'correct':'wrong');
+      fb.innerHTML = correct?'✅ ¡Excelente! 🎉 ¡Muy bien! 🌟':'❌ Incorrecto. La respuesta correcta está resaltada en verde.';
+    }
+    if(correct){
+      totalScore++;
+      confetti();
+    }
+    updateStars(correct);
+  });
+});
+
+function updateStars(correct){
+  const stars = document.getElementById('starsDisplay');
+  if(correct){
+    const inactive = stars.querySelector('span[style*="0.3"]');
+    if(inactive){
+      inactive.style.opacity = '1';
+      inactive.style.transform = 'scale(1.3)';
+      inactive.style.transition = '0.5s';
+    }
+  }
+}
+
+// === TRUE/FALSE ===
+function selectTF(btn){
+  const row = btn.parentElement;
+  if(row.querySelector('.tf-btn.correct,.tf-btn.wrong')) return;
+  row.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const correct = row.dataset.correct === btn.classList[1];
+  if(correct){
+    btn.classList.add('correct');
+    totalScore++;
+    confetti();
+  } else {
+    btn.classList.add('wrong');
+    row.querySelector('.tf-btn.'+row.dataset.correct).classList.add('correct');
+  }
+}
+
+// === DRAG AND DROP ===
+let draggedItem = null;
+document.querySelectorAll('.drag-item').forEach(item=>{
+  item.addEventListener('dragstart',e=>{
+    draggedItem = item;
+    item.classList.add('dragging');
+  });
+  item.addEventListener('dragend',e=>{
+    item.classList.remove('dragging');
+  });
+});
+
+document.querySelectorAll('.dropzone').forEach(zone=>{
+  zone.addEventListener('dragover',e=>{
+    e.preventDefault();
+    zone.classList.add('over');
+  });
+  zone.addEventListener('dragleave',e=>{
+    zone.classList.remove('over');
+  });
+  zone.addEventListener('drop',e=>{
+    e.preventDefault();
+    zone.classList.remove('over');
+    if(draggedItem && draggedItem.dataset.type === zone.dataset.type){
+      const cloned = draggedItem.cloneNode(true);
+      cloned.removeAttribute('draggable');
+      cloned.style.cursor='default';
+      cloned.style.background = 'linear-gradient(135deg,var(--verde),var(--verde-claro))';
+      zone.appendChild(cloned);
+      draggedItem.remove();
+      confetti();
+      totalScore++;
+      updateStars(true);
+      const fb = document.getElementById('lamFb');
+      if(fb && document.querySelectorAll('#lamGame .drag-item').length === 0){
+        fb.className = 'feedback show correct';
+        fb.innerHTML = '🎉 ¡Perfecto! ¡Eres un campeón! 🏆';
+      }
+    } else {
+      const fb = document.getElementById('lamFb');
+      if(fb){
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = '❌ Inténtalo de nuevo. Revisa la vocal antes de la palabra.';
+      }
+    }
+    draggedItem = null;
+  });
+});
+
+// === CHECK FILL IN ===
+function checkFinal(){
+  const answers = {f1:'alargar',f2:'2',f3:'suave',f4:'suave',f5:'ا، و، ي'};
+  let fillCorrect = 0;
+  for(const[id,ans] of Object.entries(answers)){
+    const inp = document.getElementById(id);
+    if(inp){
+      const v = inp.value.trim().toLowerCase();
+      if(v.includes(ans.toLowerCase()) || ans.includes(v) || v===ans){
+        inp.style.background = 'var(--verde)';
+        inp.style.color = 'white';
+        inp.style.borderColor = 'var(--verde)';
+        fillCorrect++;
+      } else {
+        inp.style.background = '#FECACA';
+        inp.style.borderColor = 'var(--rojo)';
+      }
+    }
+  }
+  totalScore += fillCorrect;
+  showResult();
+}
+
+function showResult(){
+  const card = document.getElementById('resultCard');
+  card.style.display = 'block';
+  document.getElementById('finalScore').textContent = totalScore;
+  
+  const stars = document.getElementById('finalStars');
+  let starHtml = '';
+  const numStars = Math.ceil(totalScore/20*5);
+  for(let i=0;i<5;i++){
+    starHtml += i<numStars?'⭐':'<span style="opacity:0.3">⭐</span>';
+  }
+  stars.innerHTML = starHtml;
+  
+  const title = document.getElementById('resultTitle');
+  const msg = document.getElementById('resultMsg');
+  if(totalScore >= 18){
+    title.textContent = '🏆 ¡Excelente! ¡Eres un campeón del Tajwid!';
+    msg.textContent = '¡Mashallah! Has aprendido muy bien. Que Allah te bendiga.';
+    confetti();
+    setTimeout(confetti,1000);
+  } else if(totalScore >= 13){
+    title.textContent = '🌟 ¡Muy bien! ¡Sigue así!';
+    msg.textContent = 'Lo estás haciendo genial. Repasa un poco más y serás experto.';
+  } else {
+    title.textContent = '💪 ¡Ánimo! Puedes mejorar';
+    msg.textContent = 'Vuelve a leer las lecciones y lo harás mejor la próxima vez.';
+  }
+  
+  if(totalScore >= 13){
+    document.getElementById('certificate').style.display = 'block';
+    document.getElementById('certScore').textContent = totalScore;
+    const d = new Date();
+    document.getElementById('certDate').textContent = d.toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric'});
+  }
+  
+  card.scrollIntoView({behavior:'smooth'});
+}
+
+function printCert(){
+  window.print();
+}
+
+function resetAll(){
+  totalScore = 0;
+  document.querySelectorAll('.option').forEach(o=>{o.classList.remove('correct','wrong')});
+  document.querySelectorAll('.feedback').forEach(f=>{f.className='feedback';f.innerHTML=''});
+  document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('active','correct','wrong'));
+  document.querySelectorAll('input.blank').forEach(i=>{i.value='';i.style.background='';i.style.color='';i.style.borderColor=''});
+  document.getElementById('resultCard').style.display = 'none';
+  document.getElementById('certificate').style.display = 'none';
+  document.getElementById('starsDisplay').querySelectorAll('span').forEach(s=>{
+    s.style.opacity = '0.3';
+    s.style.transform = 'scale(1)';
+  });
+}
+
+showPage(1);
+</script>
+
+</body>
+</html>
